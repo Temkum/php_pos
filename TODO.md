@@ -50,3 +50,5 @@ php syntax checker - window alert whem error
 
 ## MVC adminlite template
 
+## Add modules from pos system
+

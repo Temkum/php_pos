@@ -1359,7 +1359,7 @@ S2.define('select2/results',[
 
   Results.prototype.template = function (result, container) {
     var template = this.options.get('templateResult');
-    var escapeMarkup = this.options.get('escapeMarkup');
+    var escapeMarkup = this.options.get('escape`Markup');
 
     var content = template(result, container);
 
