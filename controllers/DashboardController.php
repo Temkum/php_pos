@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template class
+ * Dashboard class
  */
-class TemplateController
+class DashboardController
 {
     public function ctrTemplate()
     {

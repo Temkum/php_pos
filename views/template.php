@@ -25,14 +25,19 @@ include "modules/header.php";
 
 include "modules/sidebar.php";
 
-include "modules/content.php";
+if (isset($_GET['rules'])) {
+    if ($_GET['rules'] == 'dashboard' || $_GET['rules'] == 'users' || $_GET['rules'] == 'categories' || $_GET['rules'] == 'products' || $_GET['rules'] == 'clients' || $_GET['rules'] == 'sales' || $_GET['rules'] == 'create-sale' || $_GET['rules'] == 'reports') {
+        include 'modules/' . $_GET['rules'] . '.php';
+    }
+}
+
+// include "modules/dashboard.php";
 
 include "modules/footer.php"
 ?>
 
-
     </div>
-    <!-- ./wrapper -->
+    <!-- end wrapper -->
 
     <!-- jQuery -->
     <script src="views/plugins/jquery/jquery.min.js"></script>
