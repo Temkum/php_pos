@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventory System</title>
 
+    <link rel="icon" href="views/img/logo.png">
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,6 +30,8 @@ include "modules/sidebar.php";
 if (isset($_GET['rules'])) {
     if ($_GET['rules'] == 'dashboard' || $_GET['rules'] == 'users' || $_GET['rules'] == 'categories' || $_GET['rules'] == 'products' || $_GET['rules'] == 'clients' || $_GET['rules'] == 'sales' || $_GET['rules'] == 'create-sale' || $_GET['rules'] == 'reports') {
         include 'modules/' . $_GET['rules'] . '.php';
+    } else {
+        include 'modules/404.php';
     }
 }
 
