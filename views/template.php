@@ -15,33 +15,42 @@
     <link rel="stylesheet" href="views/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="views/dist/css/adminlte.css">
+    <!-- custom -->
+    <link rel="stylesheet" href="views/dist/css/custom.css">
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <!-- Site wrapper -->
-    <div class="wrapper">
+<body class="hold-transition sidebar-mini login-page">
 
-        <?php
+    <?php
+// check if user is logged in
+if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] == 'ok') {
 
-include "modules/header.php";
+    // site wrapper
+    echo '<div class="wrapper">';
 
-include "modules/sidebar.php";
-
-if (isset($_GET['rules'])) {
-    if ($_GET['rules'] == 'dashboard' || $_GET['rules'] == 'users' || $_GET['rules'] == 'categories' || $_GET['rules'] == 'products' || $_GET['rules'] == 'clients' || $_GET['rules'] == 'sales' || $_GET['rules'] == 'create-sale' || $_GET['rules'] == 'reports') {
-        include 'modules/' . $_GET['rules'] . '.php';
-    } else {
-        include 'modules/404.php';
+    if (isset($_GET['route'])) {
+        if ($_GET['route'] == 'dashboard' || $_GET['route'] == 'users' || $_GET['route'] == 'categories' || $_GET['route'] == 'products' || $_GET['route'] == 'clients' || $_GET['route'] == 'sales' || $_GET['route'] == 'create-sale' || $_GET['route'] == 'reports') {
+            include 'modules/' . $_GET['route'] . '.php';
+        } else {
+            include 'modules/404.php';
+        }
     }
-}
+
+    include "modules/header.php";
+
+    include "modules/sidebar.php";
 
 // include "modules/dashboard.php";
 
-include "modules/footer.php"
-?>
+    include "modules/footer.php";
 
-    </div>
-    <!-- end wrapper -->
+    echo "</div>";
+// end wrapper
+
+} else {
+    include 'modules/login.php';
+}
+?>
 
     <!-- jQuery -->
     <script src="views/plugins/jquery/jquery.min.js"></script>

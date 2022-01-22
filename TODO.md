@@ -54,3 +54,5 @@ php syntax checker - window alert whem error
 ## Add modules for pos system
 
 ## 404 page
+
+## Login page
