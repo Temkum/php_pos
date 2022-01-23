@@ -58,3 +58,4 @@ php syntax checker - window alert whem error
 ## Login page
 
 - login session
+- logout session

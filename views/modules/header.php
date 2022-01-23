@@ -38,7 +38,7 @@
                   </a>
                   <div class="dropdown-divider"></div>
                   <!-- logout-->
-                  <a href="#" class="dropdown-item btn-default text-center">Logout
+                  <a href="logout" class="dropdown-item btn-default text-center">Logout
                   </a>
       </ul>
   </nav>
