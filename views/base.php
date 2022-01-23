@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,9 +28,11 @@
     <?php
 // check if user is logged in
 if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] == 'ok') {
-
     // site wrapper
     echo '<div class="wrapper">';
+
+    include "modules/sidebar.php";
+    include "modules/header.php";
 
     if (isset($_GET['route'])) {
         if ($_GET['route'] == 'dashboard' || $_GET['route'] == 'users' || $_GET['route'] == 'categories' || $_GET['route'] == 'products' || $_GET['route'] == 'clients' || $_GET['route'] == 'sales' || $_GET['route'] == 'create-sale' || $_GET['route'] == 'reports') {
@@ -34,18 +40,13 @@ if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] == 'ok') {
         } else {
             include 'modules/404.php';
         }
+
+    } else {
+        include "modules/dashboard.php";
     }
 
-    include "modules/header.php";
-
-    include "modules/sidebar.php";
-
-// include "modules/dashboard.php";
-
     include "modules/footer.php";
-
     echo "</div>";
-// end wrapper
 
 } else {
     include 'modules/login.php';

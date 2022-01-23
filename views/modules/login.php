@@ -1,7 +1,7 @@
 <div class="bg"></div>
 <div class="login-box">
     <div class="login-logo">
-        <img src="views/img/fashion1.png" alt="Logo" width="300" height="100" class="img-fluid">
+        <!-- <img src="views/img/fashion1.png" alt="Logo" width="300" height="100" class="img-fluid"> -->
         <a href="dashboard" class="text-white"><b>Inventory</b> System</a>
     </div>
     <!-- /.login-logo -->
@@ -33,6 +33,12 @@
                     </div>
                     <!-- /.col -->
                 </div>
+
+                <?php
+$login = new UsersController();
+$login->login();
+
+?>
             </form>
 
             <p class="mb-1">

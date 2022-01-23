@@ -17,4 +17,4 @@ require_once 'models/SaleModel.php';
 require_once 'models/UserModel.php';
 
 $template = new DashboardController();
-$template->ctrTemplate();
+$template->baseTemplate();

@@ -3,10 +3,8 @@
 /**
  * Dashboard class
  */
-class DashboardController
-{
-    public function ctrTemplate()
-    {
-        include 'views/template.php';
-    }
+class DashboardController {
+	public function baseTemplate() {
+		include 'views/base.php';
+	}
 }
