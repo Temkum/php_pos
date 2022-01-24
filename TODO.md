@@ -59,3 +59,6 @@ php syntax checker - window alert whem error
 
 - login session
 - logout session
+
+## Build user model
+- 
