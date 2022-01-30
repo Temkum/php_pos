@@ -19,6 +19,11 @@ session_start();
     <link rel="stylesheet" href="views/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="views/dist/css/adminlte.css">
+    <link rel="stylesheet" href="views/plugins/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="views/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
+    <!-- sweet alert -->
+    <link rel="stylesheet" href="views/plugins/sweetalert/sweetalert2.css">
+    <script src="views/plugins/sweetalert/sweetalert2.js"></script>
     <!-- custom -->
     <link rel="stylesheet" href="views/dist/css/custom.css">
 </head>
@@ -27,7 +32,7 @@ session_start();
 
     <?php
 // check if user is logged in
-if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] == 'ok') {
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == 'OK') {
 	// site wrapper
 	echo '<div class="wrapper">';
 
@@ -68,9 +73,12 @@ if (isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] == 'ok') {
     <script src="views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="views/dist/js/adminlte.min.js"></script>
+    <!-- data tables -->
+    <script src="views/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="views/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- custom js -->
-    <script type="text/javascript" src="views/js/template.js"></script>
+    <script type="text/javascript" src="views/js/main.js"></script>
 </body>
 
 </html>

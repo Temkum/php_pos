@@ -4,7 +4,7 @@
  * Dashboard class
  */
 class DashboardController {
-	public function baseTemplate() {
+	static public function baseTemplate() {
 		include 'views/base.php';
 	}
 }
