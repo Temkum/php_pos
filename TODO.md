@@ -65,3 +65,7 @@ php syntax checker - window alert whem error
 ## Add user to db
 
 ## encrypt password
+
+## set session variable
+
+## display users to dashboard

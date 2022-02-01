@@ -9,14 +9,23 @@ class UserModel
 {
     public static function showUsers($table, $item, $value)
     {
-        $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
+        if ($item != null) {
+            // return single user from db
+            $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
 
-        $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
+            $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
 
-        $stmt->execute();
+            $stmt->execute();
 
-        return $stmt->fetch();
+            return $stmt->fetch();
+        } else {
+            // return all users
+            $stmt = Connection::connect()->prepare("SELECT * FROM $table");
 
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+        
         $stmt->close();
         $stmt = null;
     }

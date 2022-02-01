@@ -71,7 +71,8 @@ class UsersController
                                 $name = $row["name"];
 
                                 if (password_verify($password, $hashed_password)) {
-                                                              
+                                    session_start();
+
                                     // Store data in session variables
                                     $_SESSION["loggedIn"] = 'OK';
                                     $_SESSION["id"] = $id;
@@ -197,5 +198,15 @@ class UsersController
 					</script>';
             }
         }
+    }
+
+    // display users
+    public static function getUsers($item, $value)
+    {
+        $table = "users";
+
+        $response = UserModel::showUsers($table, $item, $value);
+
+        return $response;
     }
 }

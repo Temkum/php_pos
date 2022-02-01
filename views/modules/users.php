@@ -41,6 +41,7 @@
 
       <div class="card-body">
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
           <div class="row">
             <div class="col-sm-12 table-responsive">
               <table id="example1" class="table table-bordered table-striped dataTable dtr-inline tables" role="grid"
@@ -67,45 +68,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd">
+                  <?php
+                    $item = null;
+                    $value = null;
+                    $users = UsersController::getUsers($item, $value);
+                   
+                    foreach ($users as $key => $user) {
+                        echo '<tr class="odd">
                     <td class="dtr-control sorting_1" tabindex="0">1</td>
-                    <td>Super Admin</td>
-                    <td>admin</td>
-                    <td> <img src="views/img/avatar.jpg" alt="User image" width="50"></td>
-                    <td>Admin</td>
+                    <td>'.$user['name'].'</td>
+                    <td>'.$user['username'].'</td>';
+                        if ($user["photo"] != "") {
+                            echo '<td><img src="'.$user["photo"].'" alt="User image" width="50"></td>';
+                        } else {
+                            echo '<td><img src="views/img/avatar.jpg" alt="User image" width="50"></td>';
+                        }
+
+                        echo   '<td>'.$user["role"].'</td>
                     <td class="badge badge-success">Active</td>
-                    <td>01/22/2022</td>
+                    <td>'.$user["created_at"].'</td>
                     <td class="action">
                       <button class="btn btn-warning btn-sm"> <i class="fa fa-edit"></i></button>
                       <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                     </td>
-                  </tr>
-                  <tr class="odd">
-                    <td class="dtr-control sorting_1" tabindex="0">2</td>
-                    <td>Admin</td>
-                    <td>admin</td>
-                    <td> <img src="views/img/avatar.jpg" alt="User image" width="50"></td>
-                    <td>Admin</td>
-                    <td class="badge badge-danger">Deactivated</td>
-                    <td>01/21/2022</td>
-                    <td class="action">
-                      <button class="btn btn-warning btn-sm"> <i class="fa fa-edit"></i></button>
-                      <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    </td>
-                  </tr>
-                  <tr class="odd">
-                    <td class="dtr-control sorting_1" tabindex="0">3</td>
-                    <td>Another user</td>
-                    <td>user</td>
-                    <td> <img src="views/img/avatar.jpg" alt="User image" width="50"></td>
-                    <td>Admin</td>
-                    <td class="badge badge-success">Active</td>
-                    <td>01/20/2022</td>
-                    <td class="action">
-                      <button class="btn btn-warning btn-sm"> <i class="fa fa-edit"></i></button>
-                      <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    </td>
-                  </tr>
+                  </tr>';
+                    }
+                  ?>
                 </tbody>
               </table>
             </div>
