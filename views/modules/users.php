@@ -114,96 +114,96 @@
       </div>
     </div>
   </section>
-</div>
 
-<!-- Add user Modal -->
-<div class="modal fade" id="add_user" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="modal-header mb-3">
-          <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <!-- Add user Modal -->
+  <div class="modal fade" id="add_user" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header mb-3">
+            <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form method="POST" enctype="multipart/form-data">
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Name</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+                  </div>
+                  <input type="text" class="form-control" name="name" placeholder="Enter Name">
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-key"></i></div>
+                  </div>
+                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Password</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+                  </div>
+                  <input type="password" class="form-control" name="password" placeholder="Enter password">
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Role</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-user-tag"></i></div>
+                  </div>
+                  <select class="custom-select" name="role">
+                    <option selected>Choose role</option>
+                    <option value="admin">Administrator</option>
+                    <option value="cashier">Cashier</option>
+                    <option value="vendor">Vendor</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-auto">
+                <label class="sr-only">Image</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-image"></i></div>
+                  </div>
+                  <input type="file" class="new_img" name="profile_img" placeholder="Select profile image">
+                </div>
+                <p>Max image size is 5MB</p>
+                <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
+              </div>
+
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+              </div>
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+            <?php
+            $user = new UsersController();
+            $user->register();
+              ?>
+          </form>
         </div>
 
-        <form method="POST" enctype="multipart/form-data">
-          <div class="form-row align-items-center">
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Name</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-user"></i></div>
-                </div>
-                <input type="text" class="form-control" name="name" placeholder="Enter Name">
-              </div>
-            </div>
-
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Username</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-key"></i></div>
-                </div>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
-              </div>
-            </div>
-
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Password</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-user"></i></div>
-                </div>
-                <input type="password" class="form-control" name="password" placeholder="Enter password">
-              </div>
-            </div>
-
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Role</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-user-tag"></i></div>
-                </div>
-                <select class="custom-select" name="role">
-                  <option selected>Choose role</option>
-                  <option value="admin">Administrator</option>
-                  <option value="cashier">Cashier</option>
-                  <option value="vendor">Vendor</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-auto">
-              <label class="sr-only">Image</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-image"></i></div>
-                </div>
-                <input type="file" class="new_img" name="profile_img" placeholder="Select profile image">
-              </div>
-              <p>Max image size is 5MB</p>
-              <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
-            </div>
-
-            <div class="col-12 mt-3">
-              <button type="submit" class="btn btn-primary mb-2">Submit</button>
-            </div>
-
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-
-          <?php
-          $user = new UsersController();
-          $user->register();
-            ?>
-        </form>
       </div>
-
     </div>
   </div>
 </div>

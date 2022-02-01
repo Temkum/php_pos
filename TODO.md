@@ -63,3 +63,5 @@ php syntax checker - window alert whem error
 ## Build user model
 
 ## Add user to db
+
+## encrypt password

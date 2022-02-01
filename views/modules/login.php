@@ -11,7 +11,7 @@
       <p class="login-box-msg">Sign in to start your session</p>
       <form method="post" class="mb-2">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" name="username" required>
+          <input type="text" class="form-control" placeholder="Username" name="login_username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <input type="password" class="form-control" placeholder="Password" name="login_pwd">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

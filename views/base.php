@@ -26,15 +26,7 @@ session_start();
   <!-- custom -->
   <link rel="stylesheet" href="views/dist/css/custom.css">
 
-  <!-- jQuery -->
-  <script src="views/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="views/dist/js/adminlte.min.js"></script>
-  <!-- data tables -->
-  <script src="views/plugins/datatables/jquery.dataTables.js"></script>
-  <script src="views/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
   <script src="views/plugins/sweetalert/sweetalert2.js"></script>
 </head>
 
@@ -74,6 +66,16 @@ session_start();
         include 'modules/login.php';
     }
     ?>
+
+  <!-- jQuery -->
+  <script src="views/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="views/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="views/dist/js/adminlte.min.js"></script>
+  <!-- data tables -->
+  <script src="views/plugins/datatables/jquery.dataTables.js"></script>
+  <script src="views/plugins/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- custom js -->
   <script type="text/javascript" src="views/js/user.js"></script>
