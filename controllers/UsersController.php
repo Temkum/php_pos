@@ -2,88 +2,120 @@
 /**
  *
  */
-class UsersController {
+class UsersController
+{
+    public static function login()
+    {
+        if (isset($_POST['username'])) {
+            if (preg_match('/^[a-zA=Z0-9]+$/', $_POST['username']) && preg_match('/^[a-zA=Z0-9]+$/', $_POST['password'])) {
+                $table = 'users';
+                $item = 'role';
+                $value = $_POST['username'];
 
-	public static function login() {
+                $response = UserModel::showUsers($table, $item, $value);
 
-		if (isset($_POST['username'])) {
+                if ($response["username"] == $_POST["username"] && $response["password"] == $_POST["password"]) {
+                    $_SESSION["loggedIn"] = "OK";
 
-			if (preg_match('/^[a-zA=Z0-9]+$/', $_POST['username']) && preg_match('/^[a-zA=Z0-9]+$/', $_POST['password'])) {
+                    header('location: dashboard');
+                } else {
+                    echo '<br><div class="alert alert-danger">User or password incorrect</div>';
+                }
+            }
+        }
+    }
 
-				$table = 'users';
-				$item = 'role';
-				$value = $_POST['username'];
+    /* register user */
+    public function register()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["name"]) ||
+                preg_match('/^\w{5,20}$/', $_POST["username"]) ||
+                preg_match("/^[a-zA-Z][0-9a-zA-Z_!$@#^&]{5,20}$/", $_POST["password"])) {
+                    
+                    /*validate user img*/
+                $photo = "";
 
-				$response = UserModel::showUsers($table, $item, $value);
+                if (isset($_FILES["profile_img"]["tmp_name"])) {
+                    list($width, $height) = getimagesize($_FILES["profile_img"]["tmp_name"]);
 
-				if ($response["username"] == $_POST["username"] && $response["password"] == $_POST["password"]) {
+                    $new_height = 500;
+                    $new_width = 500;
 
-					$_SESSION["loggedIn"] = "OK";
+                    // create folder for each user
+                    $folder = "views/img/users/".$_POST["username"];
 
-					header('location: dashboard');
+                    if (!file_exists($folder)) {
+                        mkdir($folder, 0777);
+                    }
 
-				} else {
+                    if ($_FILES["profile_img"]["type"] == "image/png") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["username"] . $randomNumber;
+                        
+                        $photo = "views/img/users/".$_POST["username"]."/". $img_name .".png";
+                        
+                        $srcImage = imagecreatefrompng($_FILES["profile_img"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
 
-					echo '<br><div class="alert alert-danger">User or password incorrect</div>';
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-				}
+                        imagepng($destination, $photo);
+                    } elseif ($_FILES["profile_img"]["type"] == "image/jpeg") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["username"] . $randomNumber;
+                        
+                        $photo = "views/img/users/".$_POST["username"]."/". $img_name .".jpg";
+                        
+                        $srcImage = imagecreatefromjpeg($_FILES["profile_img"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
 
-			}
-		}
-	}
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-	/* register user */
-	public static function register() {
-		if (isset($_POST["name"])) {
+                        imagejpeg($destination, $photo);
+                    }
+                }
+                    
+                $table = 'users';
 
-			if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["name"]) &&
-				preg_match('/^[a-zA-Z0-9]+$/', $_POST["username"]) &&
-				preg_match('/^[a-zA-Z0-9]+$/', $_POST["password"])) {
+                $data = array('name' => $_POST["name"],
+                     'username' => $_POST["username"],
+                     'password' => $_POST['password'],
+                     'role' => $_POST["role"],
+                    'photo' => $photo);
 
-				$table = 'users';
+                $result = UserModel::addUser($table, $data);
 
-				$data = array('name' => $_POST["name"],
-					'username' => $_POST["username"],
-					'password' => $_POST['password'],
-					'role' => $_POST["role"],
-					'photo' => $_POST['photo']);
-
-				$result = UserModel::addUser($table, $data);
-
-				if ($result == 'OK') {
-					echo '<script>
+                if ($result == 'OK') {
+                    echo '<script>
+                             swal({
+                                 type: "success",
+                                 title: "User created successfully!",
+                                 showConfirmButton: true,
+                                 confirmButtonText: "Close"
+                                 }).then(function(result){
+                                     if(result.value){
+                                         window.location = "users";
+                                     }
+                                 });
+                         </script>';
+                }
+            } else {
+                echo '<script>
 					swal({
-						type: "success",
-						title: "User created successfully!",
+						type: "error",
+						title: "No special characters or blank fields are allowed",
 						showConfirmButton: true,
 						confirmButtonText: "Close"
-
-						}).then((result)=>{
+						}).then(function(result){
 							if(result.value){
 								window.location = "users";
 							}
 						});
-				</script>';
-				} else {
-					echo "Error adding user";
-				}
-
-			} else {
-				echo '<script>
-				swal({
-					type: "error",
-					title: "No special characters or blank fields",
-					showConfirmButton: true,
-					confirmButtonText: "Close"
-
-					}).then(function(result){
-						if(result.value){
-							window.location = "users";
-						}
-					});
-				</script>';
-			}
-		}
-
-	}
+					</script>';
+            }
+        }
+    }
 }

@@ -5,38 +5,39 @@ require_once "Connection.php";
 /**
  *
  */
-class UserModel {
+class UserModel
+{
+    public static function showUsers($table, $item, $value)
+    {
+        $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
 
-	public static function showUsers($table, $item, $value) {
+        $stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
 
-		$stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
+        $stmt->execute();
 
-		$stmt->bindParam(":" . $item, $value, PDO::PARAM_STR);
+        return $stmt->fetch();
 
-		$stmt->execute();
+        $stmt->close();
+        $stmt = null;
+    }
 
-		return $stmt->fetch();
+    public static function addUser($table, $data)
+    {
+        $query = "INSERT INTO $table(name, username, password, role, photo) VALUES(:name, :username, :password, :role, :photo)";
+        $stmt = Connection::connect()->prepare($query);
 
-		$stmt->close();
-		$stmt = null;
-	}
+        $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
+        $stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
+        $stmt->bindParam(':role', $data['role'], PDO::PARAM_STR);
+        $stmt->bindParam(':photo', $data['photo'], PDO::PARAM_STR);
 
-	public static function addUser($table, $data) {
-		$query = "INSERT INTO $table(name, username, password, role, photo) VALUES(:name, :username, :password, :role, :photo)";
-		$stmt = Connection::connect()->prepare($query);
-
-		$stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
-		$stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
-		$stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
-		$stmt->bindParam(':role', $data['role'], PDO::PARAM_STR);
-		$stmt->bindParam(':photo', $data['photo'], PDO::PARAM_STR);
-
-		if ($stmt->execute()) {
-			return 'OK';
-		} else {
-			return 'error';
-		}
-		$stmt->close();
-		$stmt = null;
-	}
+        if ($stmt->execute()) {
+            return 'OK';
+        } else {
+            return 'error';
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 }

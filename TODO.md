@@ -23,7 +23,7 @@ autoFileName - inside attribute
 Bracket highlighter - comment snippets - comm section tab
 console wrap - `ctrl + shift + q`
 html minifier - `ctrl + shift m`
-js format - `ctrl + alt + f`
+js format - `ctrl + alt + f``
 php syntax checker - window alert whem error
 
 - Install local server
