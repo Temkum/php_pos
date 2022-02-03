@@ -69,3 +69,8 @@ php syntax checker - window alert whem error
 ## set session variable
 
 ## display users to dashboard
+
+## Update user info
+
+- create an update method
+- load data from db

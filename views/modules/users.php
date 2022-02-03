@@ -88,7 +88,9 @@
                     <td class="badge badge-success">Active</td>
                     <td>'.$user["created_at"].'</td>
                     <td class="action">
-                      <button class="btn btn-warning btn-sm"> <i class="fa fa-edit"></i></button>
+                      <button class="btn btn-warning btn-sm edit-user" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
+                       <i class="fa fa-edit"></i>
+                      </button>
                       <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                     </td>
                   </tr>';
@@ -192,6 +194,104 @@
         </div>
 
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit user Modal -->
+<div class="modal fade" id="editUser" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header mb-3">
+          <h5 class="modal-title" id="exampleModalLabel">Edit user</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Name</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="text" class="form-control" id="editName" name="editname" placeholder="Enter Name">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Username</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-key"></i></div>
+                </div>
+                <input type="text" class="form-control" id="editUsername" name="editusername"
+                  placeholder="Enter username">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Password</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="password" class="form-control" id="editPwd" name="editpwd" placeholder="Enter password">
+
+                <input type="hidden" name="currentPwd" id="currentPwd">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Role</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user-tag"></i></div>
+                </div>
+                <select class="custom-select" name="editrole">
+                  <option value="" id="editRole">Choose role</option>
+                  <option value="admin">Administrator</option>
+                  <option value="cashier">Cashier</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only">Image</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-image"></i></div>
+                </div>
+                <input type="file" class="new_img" name="editimage" placeholder="Select profile image">
+
+                <input type="hidden" name="currentPic" id="currentPic">
+              </div>
+              <p>Max image size is 5MB</p>
+              <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
+
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-primary mb-2">Update</button>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+          <?php
+            $edit_user = new UsersController();
+            $edit_user->modifyUser();
+          ?>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

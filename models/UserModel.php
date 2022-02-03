@@ -49,4 +49,25 @@ class UserModel
         $stmt->close();
         $stmt = null;
     }
+    
+    public static function modifyUser($table, $data)
+    {
+        // $sql = "UPDATE $table SET (name, username, password, role, photo) VALUES(:name, :username, :password, :role, :photo)";
+        $sql = "UPDATE $table SET name=:name, username=:username, password=:password, role=:role, photo=:photo";
+        $stmt = Connection::connect()->prepare($sql);
+
+        $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
+        $stmt->bindParam(':username', $data['username'], PDO::PARAM_STR);
+        $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
+        $stmt->bindParam(':role', $data['role'], PDO::PARAM_STR);
+        $stmt->bindParam(':photo', $data['photo'], PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            return 'OK';
+        } else {
+            return 'error';
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 }

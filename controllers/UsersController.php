@@ -209,4 +209,99 @@ class UsersController
 
         return $response;
     }
+
+    // edit users
+    public function modifyUser()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editname"])) {
+                                                   
+                /*validate user img*/
+                $photo = $_POST['currentPic'];
+
+                if (isset($_FILES["editimage"]["tmp_name"])) {
+                    list($width, $height) = getimagesize($_FILES["editimage"]["tmp_name"]);
+
+                    $new_height = 500;
+                    $new_width = 500;
+
+                    // create folder for each user
+                    $folder = "views/img/users/".$_POST["editusername"];
+
+                    if (!file_exists($folder)) {
+                        mkdir($folder, 0777);
+                    } else {
+                        unlink($_POST["currentPic"]);
+                    }
+
+                    if ($_FILES["editimage"]["type"] == "image/png") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["editusername"] . $randomNumber;
+                        
+                        $photo = "views/img/users/".$_POST["editusername"]."/". $img_name .".png";
+                        
+                        $srcImage = imagecreatefrompng($_FILES["editimage"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
+
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+                        imagepng($destination, $photo);
+                    } elseif ($_FILES["editimage"]["type"] == "image/jpeg") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["editusername"] . $randomNumber;
+                        
+                        $photo = "views/img/users/".$_POST["editusername"]."/". $img_name .".jpg";
+                        
+                        $srcImage = imagecreatefromjpeg($_FILES["editimage"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
+
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+                        imagejpeg($destination, $photo);
+                    }
+                }
+                    
+                $table = 'users';
+                $encrypt_pwd = password_hash($_POST["editpwd"], PASSWORD_DEFAULT);
+
+                $data = array('name' => $_POST["editname"],
+                     'username' => $_POST["editusername"],
+                     'password' => $encrypt_pwd,
+                     'role' => $_POST["editrole"],
+                    'photo' => $photo);
+
+                $result = UserModel::modifyUser($table, $data);
+                
+                if ($result == 'OK') {
+                    echo '<script>
+                             swal({
+                                 type: "success",
+                                 title: "User updated successfully!",
+                                 showConfirmButton: true,
+                                 confirmButtonText: "Close"
+                                 }).then(function(result){
+                                     if(result.value){
+                                         window.location = "users";
+                                     }
+                                 });
+                         </script>';
+                }
+            } else {
+                echo '<script>
+					swal({
+						type: "error",
+						title: "No special characters or blank fields are allowed!",
+						showConfirmButton: true,
+						confirmButtonText: "Close"
+						}).then(function(result){
+							if(result.value){
+								window.location = "users";
+							}
+						});
+					</script>';
+            }
+        }
+    }
 }
