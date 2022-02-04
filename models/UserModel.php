@@ -25,9 +25,7 @@ class UserModel
             $stmt->execute();
             return $stmt->fetchAll();
         }
-        
-        $stmt->close();
-        $stmt = null;
+        unset($stmt);
     }
 
     public static function addUser($table, $data)
@@ -46,14 +44,12 @@ class UserModel
         } else {
             return 'error';
         }
-        $stmt->close();
-        $stmt = null;
+        unset($stmt);
     }
     
     public static function modifyUser($table, $data)
     {
-        // $sql = "UPDATE $table SET (name, username, password, role, photo) VALUES(:name, :username, :password, :role, :photo)";
-        $sql = "UPDATE $table SET name=:name, username=:username, password=:password, role=:role, photo=:photo";
+        $sql = "UPDATE $table SET name=:name, username=:username, password=:password, role=:role, photo=:photo WHERE username=:username";
         $stmt = Connection::connect()->prepare($sql);
 
         $stmt->bindParam(':name', $data['name'], PDO::PARAM_STR);
@@ -67,7 +63,6 @@ class UserModel
         } else {
             return 'error';
         }
-        $stmt->close();
-        $stmt = null;
+        unset($stmt);
     }
 }

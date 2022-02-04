@@ -21,13 +21,12 @@ session_start();
   <link rel="stylesheet" href="views/dist/css/adminlte.css">
   <link rel="stylesheet" href="views/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="views/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
-  <!-- sweet alert -->
-  <link rel="stylesheet" href="views/plugins/sweetalert/sweetalert2.css">
+  <!-- <link rel="stylesheet" href="views/plugins/sweetalert/sweetalert2.css"> -->
   <!-- custom -->
   <link rel="stylesheet" href="views/dist/css/custom.css">
 
-
-  <script src="views/plugins/sweetalert/sweetalert2.js"></script>
+  <!-- sweet alert -->
+  <script src="views/js/sweetalert2.all.min.js"></script>
 </head>
 
 <body class="hold-transition sidebar-mini login-page">

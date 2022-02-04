@@ -1,12 +1,12 @@
 <div class="content-wrapper">
   <style>
-  .modal-title {
-    text-transform: uppercase;
-  }
+    .modal-title {
+      text-transform: uppercase;
+    }
 
-  .sorting {
-    width: 10px;
-  }
+    .sorting {
+      width: 10px;
+    }
   </style>
 
   <section class="content-header">
@@ -75,9 +75,9 @@
                    
                     foreach ($users as $key => $user) {
                         echo '<tr class="odd">
-                    <td class="dtr-control sorting_1" tabindex="0">1</td>
-                    <td>'.$user['name'].'</td>
-                    <td>'.$user['username'].'</td>';
+                          <td class="dtr-control sorting_1" tabindex="0">1</td>
+                          <td>'.$user['name'].'</td>
+                          <td>'.$user['username'].'</td>';
                         if ($user["photo"] != "") {
                             echo '<td><img src="'.$user["photo"].'" alt="User image" width="50"></td>';
                         } else {
@@ -85,15 +85,15 @@
                         }
 
                         echo   '<td>'.$user["role"].'</td>
-                    <td class="badge badge-success">Active</td>
-                    <td>'.$user["created_at"].'</td>
-                    <td class="action">
-                      <button class="btn btn-warning btn-sm edit-user" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
-                       <i class="fa fa-edit"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                    </td>
-                  </tr>';
+                          <td class="badge badge-success">Active</td>
+                          <td>'.$user["created_at"].'</td>
+                          <td class="action">
+                            <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
+                            <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                          </td>
+                        </tr>';
                     }
                   ?>
                 </tbody>
@@ -104,96 +104,96 @@
       </div>
     </div>
   </section>
+</div>
 
-  <!-- Add user Modal -->
-  <div class="modal fade" id="add_user" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="modal-header mb-3">
-            <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <form method="POST" enctype="multipart/form-data">
-            <div class="form-row align-items-center">
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">Name</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-user"></i></div>
-                  </div>
-                  <input type="text" class="form-control" name="name" placeholder="Enter Name">
-                </div>
-              </div>
-
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-key"></i></div>
-                  </div>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
-                </div>
-              </div>
-
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">Password</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-user"></i></div>
-                  </div>
-                  <input type="password" class="form-control" name="password" placeholder="Enter password">
-                </div>
-              </div>
-
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">Role</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-user-tag"></i></div>
-                  </div>
-                  <select class="custom-select" name="role">
-                    <option selected>Choose role</option>
-                    <option value="admin">Administrator</option>
-                    <option value="cashier">Cashier</option>
-                    <option value="vendor">Vendor</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-auto">
-                <label class="sr-only">Image</label>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-image"></i></div>
-                  </div>
-                  <input type="file" class="new_img" name="profile_img" placeholder="Select profile image">
-                </div>
-                <p>Max image size is 5MB</p>
-                <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
-              </div>
-
-              <div class="col-12 mt-3">
-                <button type="submit" class="btn btn-primary mb-2">Submit</button>
-              </div>
-
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-
-            <?php
-            $user = new UsersController();
-            $user->register();
-              ?>
-          </form>
+<!-- Add user Modal -->
+<div class="modal fade" id="add_user" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header mb-3">
+          <h5 class="modal-title" id="exampleModalLabel">Add user</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
 
+        <form method="POST" enctype="multipart/form-data">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Name</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="text" class="form-control" name="name" placeholder="Enter Name">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Username</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-key"></i></div>
+                </div>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Password</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="password" class="form-control" name="password" placeholder="Enter password">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Role</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user-tag"></i></div>
+                </div>
+                <select class="custom-select" name="role">
+                  <option selected>Choose role</option>
+                  <option value="admin">Administrator</option>
+                  <option value="cashier">Cashier</option>
+                  <option value="vendor">Vendor</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only">Image</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-image"></i></div>
+                </div>
+                <input type="file" class="new_img" name="profile_img" placeholder="Select profile image">
+              </div>
+              <p>Max image size is 5MB</p>
+              <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+          <?php
+          $user = new UsersController();
+          $user->register();
+            ?>
+        </form>
       </div>
+
     </div>
   </div>
 </div>
@@ -241,7 +241,7 @@
                 </div>
                 <input type="password" class="form-control" id="editPwd" name="editpwd" placeholder="Enter password">
 
-                <input type="hidden" name="currentPwd" id="currentPwd">
+                <input type="hidden" name="currentpwd" id="currentPwd">
               </div>
             </div>
 
@@ -268,17 +268,15 @@
                 </div>
                 <input type="file" class="new_img" name="editimage" placeholder="Select profile image">
 
-                <input type="hidden" name="currentPic" id="currentPic">
+                <input type="hidden" name="currentpic" id="currentPic">
               </div>
               <p>Max image size is 5MB</p>
               <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
-
             </div>
 
             <div class="col-12 mt-3">
               <button type="submit" class="btn btn-primary mb-2">Update</button>
             </div>
-
           </div>
 
           <div class="modal-footer">
@@ -287,7 +285,7 @@
 
           <?php
             $edit_user = new UsersController();
-            $edit_user->modifyUser();
+            $edit_user->editUser();
           ?>
         </form>
       </div>

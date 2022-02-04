@@ -1,17 +1,16 @@
 <?php
-
 require_once "../controllers/UsersController.php";
 require_once "../models/UserModel.php";
 
 class AjaxUsers
 {
     // Edit user
-    public $user_id;
+    public $userId;
 
     public function ajaxEditUser()
     {
         $item = "id";
-        $value = $this->user_id;
+        $value = $this->userId;
 
         $response = UsersController::getUsers($item, $value);
 
@@ -22,6 +21,6 @@ class AjaxUsers
 /* Edit user */
 if (isset($_POST["userId"])) {
     $edit = new AjaxUsers();
-    $edit->user_id = $_POST["userId"];
+    $edit->userId = $_POST["userId"];
     $edit->ajaxEditUser();
 }

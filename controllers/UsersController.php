@@ -11,27 +11,8 @@ class UsersController
         $username_err = $password_err = $login_err = "";
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            /* if (preg_match('/^\w{5,20}$/', $_POST['login_username']) && preg_match('/^[a-zA-Z][0-9a-zA-Z_!$@#^&]{5,20}$/', $_POST['login_pwd'])) {
-                $encrypt_pwd = password_hash($_POST["login_pwd"], PASSWORD_DEFAULT);
-                print_r($encrypt_pwd);
-                exit;
 
-                $table = 'users';
-                $item = 'role';
-                $value = $_POST['login_username'];
-
-                $response = UserModel::showUsers($table, $item, $value);
-
-                if ($response["username"] == $_POST["login_username"] && $response["password"] == $encrypt_pwd) {
-                    $_SESSION["loggedIn"] = "OK";
-
-                    header('location: dashboard');
-                } else {
-                    echo '<br><div class="alert alert-danger">Username or password is incorrect</div>';
-                }
-            } */
-
-            // Check if username is empty
+             // Check if username is empty
             if (empty(trim($_POST["login_username"]))) {
                 $username_err = '<br><div class="alert alert-danger">Please enter username!</div>';
                 echo $username_err;
@@ -50,14 +31,14 @@ class UsersController
             if (empty($username_err) && empty($password_err)) {
                 // Prepare a select statement
                 $sql = "SELECT id, username, password, name, role, photo FROM users WHERE username = :username";
-        
+
                 if ($stmt = Connection::connect()->prepare($sql)) {
                     // Bind variables to the prepared statement as parameters
                     $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
-            
+
                     // Set parameters
                     $param_username = trim($_POST["login_username"]);
-            
+
                     // Attempt to execute the prepared statement
                     if ($stmt->execute()) {
                         // Check if username exists, if yes then verify password
@@ -80,7 +61,7 @@ class UsersController
                                     $_SESSION["role"] = $role;
                                     $_SESSION["photo"] = $profile_pic;
                                     $_SESSION["name"] = $name;
-                            
+
                                     // Redirect user
                                     header("Location: dashboard");
                                 } else {
@@ -108,10 +89,10 @@ class UsersController
     /* register user */
     public function register()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["name"]) ||
+        if (isset($_POST["username"])) {
+            if (preg_match('/^[a-zA-Z0-9]+$/', isset($_POST["name"])) ||
                 preg_match('/^\w{5,20}$/', $_POST["username"]) ||
-                preg_match("/^[a-zA-Z][0-9a-zA-Z_!$@#^&]{5,20}$/", $_POST["password"])) {
+                preg_match("/^[a-zA-Z][0-9a-zA-Z_!$@#^&]{5,20}$/", isset($_POST["password"]))) {
                     
                     /*validate user img*/
                 $photo = "";
@@ -171,10 +152,11 @@ class UsersController
 
                 if ($result == 'OK') {
                     echo '<script>
-                             swal({
-                                 type: "success",
+                             Swal.fire({
+                                 icon: "success",
                                  title: "User created successfully!",
                                  showConfirmButton: true,
+                                 timer: 1500,
                                  confirmButtonText: "Close"
                                  }).then(function(result){
                                      if(result.value){
@@ -185,8 +167,8 @@ class UsersController
                 }
             } else {
                 echo '<script>
-					swal({
-						type: "error",
+					Swal.fire({
+						icon: "error",
 						title: "No special characters or blank fields are allowed",
 						showConfirmButton: true,
 						confirmButtonText: "Close"
@@ -211,15 +193,15 @@ class UsersController
     }
 
     // edit users
-    public function modifyUser()
+    public function editUser()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (preg_match('/^[a-zA-Z0-9]+$/', $_POST["editname"])) {
+        if (isset($_POST["editusername"])) {
+            if (preg_match('/^[a-zA-Z0-9_]+$/', $_POST["editusername"])) {
                                                    
                 /*validate user img*/
-                $photo = $_POST['currentPic'];
+                $photo = $_POST['currentpic'];
 
-                if (isset($_FILES["editimage"]["tmp_name"])) {
+                if (isset($_FILES["editimage"]["tmp_name"]) && !empty($_FILES['editimage']["tmp_name"])) {
                     list($width, $height) = getimagesize($_FILES["editimage"]["tmp_name"]);
 
                     $new_height = 500;
@@ -228,10 +210,10 @@ class UsersController
                     // create folder for each user
                     $folder = "views/img/users/".$_POST["editusername"];
 
-                    if (!file_exists($folder)) {
-                        mkdir($folder, 0777);
+                    if (!empty($_POST['currentpic'])) {
+                        unlink($_POST['currentpic']);
                     } else {
-                        unlink($_POST["currentPic"]);
+                        mkdir($folder, 0777);
                     }
 
                     if ($_FILES["editimage"]["type"] == "image/png") {
@@ -265,7 +247,7 @@ class UsersController
                     
                 $table = 'users';
                 $encrypt_pwd = password_hash($_POST["editpwd"], PASSWORD_DEFAULT);
-
+                
                 $data = array('name' => $_POST["editname"],
                      'username' => $_POST["editusername"],
                      'password' => $encrypt_pwd,
@@ -276,11 +258,11 @@ class UsersController
                 
                 if ($result == 'OK') {
                     echo '<script>
-                             swal({
-                                 type: "success",
+                             Swal.fire({
+                                 icon: "success",
                                  title: "User updated successfully!",
                                  showConfirmButton: true,
-                                 confirmButtonText: "Close"
+                                 timer: 2000
                                  }).then(function(result){
                                      if(result.value){
                                          window.location = "users";
@@ -290,12 +272,12 @@ class UsersController
                 }
             } else {
                 echo '<script>
-					swal({
-						type: "error",
-						title: "No special characters or blank fields are allowed!",
-						showConfirmButton: true,
-						confirmButtonText: "Close"
-						}).then(function(result){
+					Swal.fire({
+						icon: "error",
+                        position: "top-end",
+						title: "User update failed. Please try again later!",
+                        timer: 5000						
+						}).then((result)=>{
 							if(result.value){
 								window.location = "users";
 							}

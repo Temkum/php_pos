@@ -9,8 +9,8 @@ $(".new_img").change(function () {
   ) {
     $(".new_img").val("");
 
-    swal({
-      type: "error",
+    Swal.fire({
+      icon: "error",
       title: "Error uploading image",
       text: "Image type has to be JPEG, JPG or PNG!",
       showConfirmButton: true,
@@ -20,8 +20,8 @@ $(".new_img").change(function () {
   } else if (image["size"] > 5000000) {
     $(".new_img").val("");
 
-    swal({
-      type: "error",
+    Swal.fire({
+      icon: "error",
       title: "Image size error",
       text: "Image size too big. It has to be less than 5Mb!",
       showConfirmButton: true,
@@ -41,7 +41,7 @@ $(".new_img").change(function () {
 
 /* EDIT USER */
 
-$(".edit-user").on("click", function () {
+$(".editUserBtn").on("click", function () {
   let userId = $(this).attr("userId");
 
   let data = new FormData();
@@ -56,17 +56,17 @@ $(".edit-user").on("click", function () {
     processData: false,
     dataType: "json",
     success: function (response) {
+      // console.log(response);
       $("#editName").val(response["name"]);
       $("#editUsername").val(response["username"]);
       $("#editRole").html(response["role"]);
-      $("#editPwd").val(response["password"]);
+      $("#editRole").val(response["role"]);
+      $("#currentPwd").val(response["password"]);
       $("#currentPic").val(response["photo"]);
 
       if (response["photo"] != "") {
         $(".preview").attr("src", response["photo"]);
       }
-
-      // console.log(response);
     },
   });
 });

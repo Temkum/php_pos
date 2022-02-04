@@ -74,3 +74,5 @@ php syntax checker - window alert whem error
 
 - create an update method
 - load data from db
+
+> Fix user login and user update feature
