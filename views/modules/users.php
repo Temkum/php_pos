@@ -1,12 +1,12 @@
 <div class="content-wrapper">
   <style>
-    .modal-title {
-      text-transform: uppercase;
-    }
+  .modal-title {
+    text-transform: uppercase;
+  }
 
-    .sorting {
-      width: 10px;
-    }
+  .sorting {
+    width: 10px;
+  }
   </style>
 
   <section class="content-header">
@@ -84,16 +84,23 @@
                             echo '<td><img src="views/img/avatar.jpg" alt="User image" width="50"></td>';
                         }
 
-                        echo   '<td>'.$user["role"].'</td>
-                          <td class="badge badge-success">Active</td>
-                          <td>'.$user["created_at"].'</td>
-                          <td class="action">
-                            <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
-                            <i class="fa fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                          </td>
-                        </tr>';
+                        echo   '<td>'.$user["role"].'</td>';
+                        if ($user['status'] == 1) {
+                            echo '<td class="badge-success btn badge btn-activate" userId="'.$user["id"].'" 
+                            userStat="0">Active</td>';
+                        } else {
+                            echo '<td class="badge-danger btn badge btn-activate" userId="'.$user["id"].'"
+                            userStat="1">Deactivated</td>';
+                        }
+                        echo '<td>'.$user["last_login"].'</td>';
+                        echo '<td class="action">
+                      <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser"
+                        userId="'.$user["id"].'">
+                        <i class="fa fa-edit"></i>
+                      </button>
+                      <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    </td>
+                    </tr>';
                     }
                   ?>
                 </tbody>

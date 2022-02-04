@@ -54,7 +54,6 @@ $(".editUserBtn").on("click", function () {
     cache: false,
     contentType: false,
     processData: false,
-    dataType: "json",
     success: function (response) {
       // console.log(response);
       $("#editName").val(response["name"]);
@@ -69,4 +68,40 @@ $(".editUserBtn").on("click", function () {
       }
     },
   });
+});
+
+/* User activation */
+$(".btn-activate").click(function () {
+  let userID = $(this).attr("userId");
+  let userStatus = $(this).attr("userStat");
+
+  // update database with ajax
+  let data = new FormData();
+  data.append("activateId", userID);
+  data.append("activateUser", userStatus);
+
+  $.ajax({
+    url: "ajax/users.ajax.php",
+    method: "POST",
+    data: data,
+    contentType: false,
+    cache: false,
+    processData: false,
+    dataType: "json",
+    success: (response) => {},
+  });
+
+  if (userStatus == 0) {
+    $(this).removeClass("badge-success");
+    $(this).addClass("badge-danger");
+    $(this).html("Deactivated");
+    // $(this).attr("userStat", 1);
+    userStatus = 1;
+  } else {
+    $(this).addClass("badge-success");
+    $(this).removeClass("badge-danger");
+    $(this).html("Active");
+    // $(this).attr("userStat", 0);
+    userStatus = 0;
+  }
 });

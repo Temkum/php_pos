@@ -76,3 +76,5 @@ php syntax checker - window alert whem error
 - load data from db
 
 > Fix user login and user update feature
+
+## activate and deactivate users

@@ -30,7 +30,7 @@ class UsersController
             // validate credentials
             if (empty($username_err) && empty($password_err)) {
                 // Prepare a select statement
-                $sql = "SELECT id, username, password, name, role, photo FROM users WHERE username = :username";
+                $sql = "SELECT * FROM users WHERE username = :username";
 
                 if ($stmt = Connection::connect()->prepare($sql)) {
                     // Bind variables to the prepared statement as parameters
@@ -50,20 +50,25 @@ class UsersController
                                 $role = $row["role"];
                                 $profile_pic = $row["photo"];
                                 $name = $row["name"];
-
+                                $status = $row['status'];
+                                
                                 if (password_verify($password, $hashed_password)) {
-                                    session_start();
+                                    if ($status == 1) {
+                                        // Store data in session variables
+                                        $_SESSION["loggedIn"] = 'OK';
+                                        $_SESSION["id"] = $id;
+                                        $_SESSION["username"] = $username;
+                                        $_SESSION["role"] = $role;
+                                        $_SESSION["photo"] = $profile_pic;
+                                        $_SESSION["name"] = $name;
+                                        $_SESSION["status"] = $status;
 
-                                    // Store data in session variables
-                                    $_SESSION["loggedIn"] = 'OK';
-                                    $_SESSION["id"] = $id;
-                                    $_SESSION["username"] = $username;
-                                    $_SESSION["role"] = $role;
-                                    $_SESSION["photo"] = $profile_pic;
-                                    $_SESSION["name"] = $name;
-
-                                    // Redirect user
-                                    header("Location: dashboard");
+                                        // Redirect user
+                                        header("Location: dashboard");
+                                    } else {
+                                        $status_err = '<br><div class="alert alert-danger">User is not activated!</div>';
+                                        echo  $status_err;
+                                    }
                                 } else {
                                     // Password is not valid, display a generic error message
                                     $login_err = '<br><div class="alert alert-danger">Invalid username or password.</div>';
