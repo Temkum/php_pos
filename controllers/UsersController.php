@@ -27,6 +27,8 @@ class UsersController
                 $password = trim($_POST["login_pwd"]);
             }
 
+            $table = 'users';
+
             // validate credentials
             if (empty($username_err) && empty($password_err)) {
                 // Prepare a select statement
@@ -63,8 +65,22 @@ class UsersController
                                         $_SESSION["name"] = $name;
                                         $_SESSION["status"] = $status;
 
-                                        // Redirect user
-                                        header("Location: dashboard");
+                                        // capture date & time for last login
+                                        date_default_timezone_set('Africa/Douala');
+                                        $date_time = date('Y-m-d H:i:s');
+                                     
+                                        $item1 = "last_login";
+                                        $value1 = $date_time;
+                                        
+                                        $item2 = "id";
+                                        $value2 = $id;
+
+                                        $last_login = UserModel::activateUser($table, $item1, $value1, $item2, $value2);
+
+                                        if ($last_login == 'OK') {
+                                            // Redirect user
+                                            header("Location: dashboard");
+                                        }
                                     } else {
                                         $status_err = '<br><div class="alert alert-danger">User is not activated!</div>';
                                         echo  $status_err;

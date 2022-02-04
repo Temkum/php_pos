@@ -95,13 +95,11 @@ $(".btn-activate").click(function () {
     $(this).removeClass("badge-success");
     $(this).addClass("badge-danger");
     $(this).html("Deactivated");
-    // $(this).attr("userStat", 1);
-    userStatus = 1;
+    $(this).attr("userStat", 1);
   } else {
     $(this).addClass("badge-success");
     $(this).removeClass("badge-danger");
     $(this).html("Active");
-    // $(this).attr("userStat", 0);
-    userStatus = 0;
+    $(this).attr("userStat", 0);
   }
 });
