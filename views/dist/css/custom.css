@@ -19,3 +19,8 @@
 .wrapper {
   width: 100%;
 }
+
+.content .card-title {
+  text-transform: uppercase;
+  font-weight: bold;
+}
