@@ -89,3 +89,5 @@ php syntax checker - window alert whem error
 - add category template
 - create controller and model
 - add category methods in controller and model
+
+### display or read categories from database

@@ -1,12 +1,12 @@
 <div class="content-wrapper">
   <style>
-    .modal-title {
-      text-transform: uppercase;
-    }
+  .modal-title {
+    text-transform: uppercase;
+  }
 
-    .sorting {
-      width: 10px;
-    }
+  .sorting {
+    width: 10px;
+  }
   </style>
 
   <section class="content-header">

@@ -40,4 +40,13 @@ class CategoriesController
             }
         }
     }
+
+    /* Load categories */
+    public static function displayCategories($item, $value)
+    {
+        $table = 'categories';
+        $response = CategoryModel::loadCategories($table, $item, $value);
+
+        return $response;
+    }
 }
