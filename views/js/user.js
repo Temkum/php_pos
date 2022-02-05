@@ -103,3 +103,40 @@ $(".btn-activate").click(function () {
     $(this).attr("userStat", 0);
   }
 });
+
+// prevent username duplication
+$("#username").change(function () {
+  // remove alert after input change
+  $(".alert").remove();
+
+  let userName = $(this).val();
+
+  let data = new FormData();
+  data.append("validateUsername", userName);
+
+  $.ajax({
+    url: "ajax/users.ajax.php",
+    method: "POST",
+    data: data,
+    contentType: false,
+    cache: false,
+    processData: false,
+    dataType: "json",
+    success: function (response) {
+      if (response) {
+        alertMsg =
+          '<div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Username already exists in the system!</div>';
+        $("#username").parent().after(alertMsg);
+        $("#username").val("");
+        /* Swal.fire({
+          icon: "warning",
+          title: "Username already exists in the system!",
+          showConfirmButton: true,
+          timer: 2500,
+        }).then((result) => {
+          $("#username").val("");
+        }); */
+      }
+    },
+  });
+});
