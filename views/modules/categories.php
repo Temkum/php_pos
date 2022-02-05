@@ -59,41 +59,6 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php
-                    $item = null;
-                    $value = null;
-                    $users = UsersController::getUsers($item, $value);
-                   
-                    foreach ($users as $key => $user) {
-                        echo '<tr class="odd">
-                          <td class="dtr-control sorting_1" tabindex="0">'.($key + 1).'</td>
-                          <td>'.$user['name'].'</td>
-                          <td>'.$user['username'].'</td>';
-                        if ($user["photo"] != "") {
-                            echo '<td><img src="'.$user["photo"].'" alt="User image" width="50"></td>';
-                        } else {
-                            echo '<td><img src="views/img/avatar.jpg" alt="User image" width="50"></td>';
-                        }
-
-                        echo   '<td>'.$user["role"].'</td>';
-                        if ($user['status'] == 1) {
-                            echo '<td class="badge-success btn badge btn-activate" userId="'.$user["id"].'" 
-                            userStat="0">Active</td>';
-                        } else {
-                            echo '<td class="badge-danger btn badge btn-activate" userId="'.$user["id"].'"
-                            userStat="1">Deactivated</td>';
-                        }
-                        echo '<td>'. $user["last_login"] .'</td>';
-                        echo '<td class="action">
-                      <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm delUserBtn" userId="'.$user["id"].'" userPhoto="'.$user["photo"].'" userName="'.$user["username"].'">
-                      <i class="fa fa-trash"></i></button>
-                    </td>
-                    </tr>';
-                    }
-                  ?>
                 </tbody>
               </table>
             </div>
@@ -116,7 +81,7 @@
           </button>
         </div>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST">
           <div class="form-row align-items-center">
             <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup">Category Name</label>
@@ -139,8 +104,8 @@
           </div>
 
           <?php
-        //   $user = new UsersController();
-        //   $user->store();
+                $add_cat = new CategoriesController();
+                $add_cat->store();
             ?>
         </form>
       </div>

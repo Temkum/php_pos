@@ -84,3 +84,8 @@ php syntax checker - window alert whem error
 ## delete users
 
 # Categories module
+
+- create category template
+- add category template
+- create controller and model
+- add category methods in controller and model
