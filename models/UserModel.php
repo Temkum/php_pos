@@ -81,4 +81,19 @@ class UserModel
         $stmt->close();
         $stmt = null;
     }
+
+    public static function deleteUser($table, $data)
+    {
+        $sql = "DELETE FROM $table WHERE id=:id";
+        $stmt = Connection::connect()->prepare($sql);
+        
+        $stmt->bindParam(':id', $data, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return 'OK';
+        } else {
+            return 'error';
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 }

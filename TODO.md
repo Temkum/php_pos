@@ -80,3 +80,7 @@ php syntax checker - window alert whem error
 ## activate and deactivate users
 
 ## add last login
+
+## delete users
+
+# Categories module
