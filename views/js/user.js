@@ -140,3 +140,24 @@ $("#username").change(function () {
     },
   });
 });
+
+/* Delete user */
+$(".delUserBtn").click(function () {
+  let userId = $(this).attr("userId");
+  let userPhoto = $(this).attr("userPhoto");
+  let username = $(this).attr("userName");
+
+  Swal.fire({
+    title: "Are you sure you want to delete the user?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete user!",
+  }).then((result) => {
+    if (result.value) {
+      window.location = `index.php?route=users&userId=${userId}&username=${username}&userPhoto=${userPhoto}`;
+    }
+  });
+});

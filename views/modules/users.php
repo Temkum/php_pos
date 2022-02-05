@@ -94,11 +94,11 @@
                         }
                         echo '<td>'.$user["last_login"].'</td>';
                         echo '<td class="action">
-                      <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser"
-                        userId="'.$user["id"].'">
+                      <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
                         <i class="fa fa-edit"></i>
                       </button>
-                      <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                      <button class="btn btn-danger btn-sm delUserBtn" userId="'.$user["id"].'" userPhoto="'.$user["photo"].'" userName="'.$user["username"].'">
+                      <i class="fa fa-trash"></i></button>
                     </td>
                     </tr>';
                     }
@@ -300,3 +300,6 @@
     </div>
   </div>
 </div>
+<?php
+  $deleteUser = new UsersController();
+  $deleteUser->deleteUser();
