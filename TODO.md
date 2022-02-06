@@ -95,3 +95,4 @@ php syntax checker - window alert whem error
 ### edit category
 
 - create an edit method in model and controller
+- delete categories

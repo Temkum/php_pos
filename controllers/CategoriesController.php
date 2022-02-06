@@ -92,4 +92,31 @@ class CategoriesController
             }
         }
     }
+
+    /* Delete category */
+    public static function destroy()
+    {
+        if (isset($_GET["categoryId"])) {
+            $table ="categories";
+            $data = $_GET["categoryId"];
+
+            $response = CategoryModel::deleteCategory($table, $data);
+            // var_dump($response);
+
+            if ($response == "OK") {
+                echo'<script>
+                  Swal.fire({
+                      icon: "success",
+                      title: "The category has been successfully deleted",
+                      showConfirmButton: true,
+                      confirmButtonText: "Close",
+                      }).then(function(result){
+                          if (result.value) {
+                          window.location = "categories";
+                          }
+                        })
+                    </script>';
+            }
+        }
+    }
 }

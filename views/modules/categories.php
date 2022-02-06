@@ -63,7 +63,7 @@
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 
-                                <button class="btn btn-danger btn-sm delCatBtn">
+                                <button class="btn btn-danger btn-sm delCatBtn" catID="'.$category['id'].'">
                                 <i class="fa fa-trash"></i></button>
                             </td>
                             </tr>';
@@ -169,3 +169,7 @@
     </div>
   </div>
 </div>
+
+<?php
+  $deleteCategory = new CategoriesController();
+  $deleteCategory->destroy();

@@ -54,4 +54,19 @@ class CategoryModel
         $stmt->close();
         $stmt = null;
     }
+
+    public static function deleteCategory($table, $data)
+    {
+        $stmt = Connection::connect()->prepare("DELETE FROM $table WHERE id = :id");
+
+        $stmt -> bindParam(":id", $data, PDO::PARAM_INT);
+
+        if ($stmt -> execute()) {
+            return "OK";
+        } else {
+            return "error";
+        }
+        $stmt->close();
+        $stmt = null;
+    }
 }
