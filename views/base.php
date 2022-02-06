@@ -24,8 +24,10 @@ session_start();
   <!-- <link rel="stylesheet" href="views/plugins/sweetalert/sweetalert2.css"> -->
   <!-- custom -->
   <link rel="stylesheet" href="views/dist/css/custom.css">
+  <!-- icheck -->
+  <link rel="stylesheet" href="views/plugins/icheck/flat/_all.css">
 
-  <!-- sweet alert -->
+  <!-- sweet alert script -->
   <script src="views/js/sweetalert2.all.min.js"></script>
 </head>
 
@@ -76,6 +78,8 @@ session_start();
   <script src="views/plugins/datatables/jquery.dataTables.js"></script>
   <script src="views/plugins/datatables/dataTables.bootstrap4.min.js"></script>
   <script src="views/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <!-- icheck -->
+  <script src="views/plugins/icheck/icheck.min.js"></script>
 
   <!-- custom js -->
   <script type="text/javascript" src="views/js/user.js"></script>

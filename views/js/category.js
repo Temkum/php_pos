@@ -15,7 +15,7 @@ $(document).ready(function () {
       processData: false,
       dataType: "json",
       success: function (response) {
-        console.log("response", response);
+        // console.log("response", response);
         $("#editCategory").val(response["category_name"]);
         $("#categoryID").val(response["id"]);
       },
