@@ -96,3 +96,8 @@ php syntax checker - window alert whem error
 
 - create an edit method in model and controller
 - delete categories
+
+## PRoduct section
+
+- used to manage inventory
+- build the view layout
