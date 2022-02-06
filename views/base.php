@@ -75,9 +75,11 @@ session_start();
   <!-- data tables -->
   <script src="views/plugins/datatables/jquery.dataTables.js"></script>
   <script src="views/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="views/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 
   <!-- custom js -->
   <script type="text/javascript" src="views/js/user.js"></script>
+  <script type="text/javascript" src="views/js/category.js"></script>
   <script type="text/javascript" src="views/js/main.js"></script>
 </body>
 

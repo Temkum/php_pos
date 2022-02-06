@@ -57,7 +57,6 @@ $(document).ready(function () {
       processData: false,
       dataType: "json",
       success: function (response) {
-        // console.log(response);
         $("#editName").val(response["name"]);
         $("#editUsername").val(response["username"]);
         $("#editRole").html(response["role"]);
