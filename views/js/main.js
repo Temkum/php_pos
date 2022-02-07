@@ -1,6 +1,8 @@
 /* data tables */
 $(document).ready(function () {
-  $(".tables").DataTable();
+  $(".tables").DataTable({
+    responsive: true,
+  });
 
   // icheck plugin
   $("input").iCheck({

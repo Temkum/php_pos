@@ -46,12 +46,13 @@
                 <thead>
                   <tr role="row">
                     <th class="sorting">#</th>
-                    <th class="">Product</th>
-                    <th class="">Description</th>
+                    <th class="">Code</th>
                     <th class="">Category</th>
+                    <th class="">Description</th>
+                    <th class="">Image</th>
                     <th class="">Stock</th>
+                    <th class="">Purchase Price</th>
                     <th class="">Sale Price</th>
-                    <th class="">Discount Price</th>
                     <th class="">Date Added</th>
                     <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending">Action
@@ -59,25 +60,45 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="odd">
-                    <td class="dtr-control sorting_1" tabindex="0"></td>
-                    <td></td>
-                    <td></td>
-                    <td><img src="views/img/avatar.jpg" alt="Product image" width="50"></td>
-                    <td></td>
-                    <td class="" userId="" userStat="0">
-                    </td>
-                    <td class="" userId="" userStat="1">
-                    </td>
-                    <td></td>
-                    <td class="action">
-                      <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="" userId="">
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button class="btn btn-danger btn-sm" userId="" userPhoto="" userName="">
-                        <i class="fa fa-trash"></i></button>
-                    </td>
-                  </tr>
+                  <?php
+                        $item = null;
+                        $value = null;
+                        $products = ProductsController::show($item, $value);
+
+                        foreach ($products as $key => $product) {
+                            echo '<tr class="odd">
+                            <td class="dtr-control sorting_1" tabindex="0">'. ($key +1) .'</td>
+                            <td>'. $product['code'].'</td>';
+
+                            $item = "id";
+                            $value = $product['category_id'];
+                            $category = CategoriesController::display($item, $value);
+                                                        
+                            // echo '<td>'. $category['category_name'] .'</td>
+                            echo '<td>';
+                            if (isset($category['category_name'])) {
+                                echo $category['category_name'];
+                            } else {
+                                echo 'No category found!';
+                            }
+                            echo '</td>
+                            <td>'. $product['description'].'</td>
+                            <td><img src="views/img/avatar.jpg" alt="Product image" width="50"></td>
+                            <td>'. $product['stock'].'</td>
+                            <td>$'. $product['buying_price'].'</td>
+                            <td>$'. $product['sale_price'].'</td>
+                            <td>'. $product['created_at'].'</td>
+                            <td class="action">
+                            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="" userId="">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm" userId="" userPhoto="" userName="">
+                                <i class="fa fa-trash"></i></button>
+                            </td>
+                        </tr>';
+                        }
+                    ?>
+
                 </tbody>
               </table>
             </div>
