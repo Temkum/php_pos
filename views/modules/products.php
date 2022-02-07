@@ -41,7 +41,7 @@
         <div class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
             <div class="col-sm-12 table-responsive">
-              <table id="example1" class="table table-bordered table-striped dataTable dtr-inline tables" role="grid"
+              <table class="table table-bordered table-striped dataTable dtr-inline tables products-table" role="grid"
                 aria-describedby="example1_info">
                 <thead>
                   <tr role="row">
@@ -51,7 +51,7 @@
                     <th class="">Description</th>
                     <th class="">Image</th>
                     <th class="">Stock</th>
-                    <th class="">Purchase Price</th>
+                    <th class="">Regular Price</th>
                     <th class="">Sale Price</th>
                     <th class="">Date Added</th>
                     <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -59,7 +59,7 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody>
+                <!-- <tbody>
                   <?php
                         $item = null;
                         $value = null;
@@ -98,8 +98,7 @@
                         </tr>';
                         }
                     ?>
-
-                </tbody>
+                                </tbody> -->
               </table>
             </div>
           </div>
@@ -125,16 +124,6 @@
           <div class="form-row align-items-center">
 
             <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Product name</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-layer-group"></i></div>
-                </div>
-                <input type="text" class="form-control" name="new_product" placeholder="Enter Product name">
-              </div>
-            </div>
-
-            <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup">Product Code</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -148,7 +137,7 @@
               <label class="sr-only" for="inlineFormInputGroup">Description</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-product"></i></div>
+                  <div class="input-group-text"><i class="fa fa-align-left"></i></div>
                 </div>
                 <input type="text" class="form-control" name="new_desc" placeholder="Enter description">
               </div>

@@ -101,3 +101,17 @@ php syntax checker - window alert whem error
 
 - used to manage inventory
 - build the view layout
+
+> fix loading products using dynamic datatable plugin
+> Error: DataTables warning: table id=DataTables_Table_0 - Cannot reinitialise DataTable. For more information about this error, please see http://datatables.net/tn/3
+
+> **Fix** By adding `.destroy()` to your function like so
+
+```
+$('#example').dataTable({
+
+    destroy: true,
+    ...
+
+}).destroy();
+```
