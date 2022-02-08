@@ -15,8 +15,8 @@ class ProductsController
         if (isset($_POST['new_desc'])) {
             if (preg_match('/^[a-zA-Z0-9_ ]+$/', $_POST['new_desc']) &&
             preg_match('/^[0-9]+$/', $_POST['new_stock']) &&
-            preg_match('/^[0-9]+$/', $_POST['new_buyingprice']) &&
-            preg_match('/^[0-9]+$/', $_POST['new_saleprice'])) {
+            preg_match('/^[0-9.]+$/', $_POST['new_buyingprice']) &&
+            preg_match('/^[0-9.]+$/', $_POST['new_saleprice'])) {
                 $table = 'products';
                 $photo = 'views/img/avatar.jpg';
 

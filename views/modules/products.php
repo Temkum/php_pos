@@ -190,7 +190,7 @@
                     <div class="input-group-text"><i class="fa fa-arrow-up"></i></div>
                   </div>
                   <input type="number" class="form-control" name="new_buyingprice" placeholder="Add buying price"
-                    min="0" id="buyingPrice">
+                    step="any" min="0" id="buyingPrice">
                 </div>
               </div>
 
@@ -201,7 +201,7 @@
                     <div class="input-group-text"><i class="fa fa-arrow-down"></i></div>
                   </div>
                   <input type="number" class="form-control" name="new_saleprice" placeholder="Add Sale price" min="0"
-                    id="salePrice">
+                    step="any" id="salePrice">
                 </div>
               </div>
 
@@ -222,7 +222,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
 
             <div class="col-auto">

@@ -119,3 +119,4 @@ $('#example').dataTable({
 ## add products to db
 
 - make category dynamic from db
+- add decimal places
