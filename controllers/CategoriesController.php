@@ -17,7 +17,7 @@ class CategoriesController
                       Swal.fire({
                         icon: "success",
                         title: "Category added successfully!",
-                        timer: 1500						
+                        confirmButtonText: "Close"					
                         }).then((result)=>{
                           if(result.value){
                             window.location = "categories";

@@ -1,7 +1,7 @@
 <style>
-.percent-checkbox {
-  justify-content: center;
-}
+  .percent-checkbox {
+    justify-content: center;
+  }
 </style>
 
 <div class="content-wrapper">
@@ -98,7 +98,7 @@
                         </tr>';
                         }
                     ?>
-                                </tbody> -->
+                </tbody> -->
               </table>
             </div>
           </div>
@@ -124,16 +124,40 @@
           <div class="form-row align-items-center">
 
             <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Category</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-th"></i></div>
+                </div>
+                <select class="custom-select" name="new_category" id="prodCategory">
+                  <option selected>Select Category</option>
+
+                  <?php
+                  $item = null;
+                  $value = null;
+                  $categories = CategoriesController::display($item, $value);
+                  
+                    foreach ($categories as $key => $category) {
+                        echo '<option value="'.$category["id"].'">'.$category["category_name"].'</option>';
+                    }
+                  ?>
+
+                </select>
+              </div>
+            </div>
+
+            <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup">Product Code</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-code"></i></div>
                 </div>
-                <input type="text" class="form-control" name="new_code" placeholder="Add Product code">
+                <input type="text" class="form-control" name="new_code" id="newCode" placeholder="Product code"
+                  readonly>
               </div>
             </div>
 
-            <div class="col-auto">
+            <!-- <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup">Description</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -141,27 +165,11 @@
                 </div>
                 <input type="text" class="form-control" name="new_desc" placeholder="Enter description">
               </div>
-            </div>
-
-            <!-- <div class="form-group">
-              <label>Description</label>
-              <textarea class="form-control" rows="3" cols="30" placeholder="Enter description"></textarea>
             </div> -->
 
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup">Category</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-th"></i></div>
-                </div>
-                <select class="custom-select" name="role">
-                  <option selected>Select Category</option>
-                  <option value="suit">Suit</option>
-                  <option value="women">Women</option>
-                  <option value="men">Men</option>
-                  <option value="children">Children</option>
-                </select>
-              </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="3" cols="30" placeholder="Enter description"
+                name="new_desc"></textarea>
             </div>
 
             <div class="col-auto">
@@ -174,14 +182,15 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row mb-4">
               <div class="col-md-6 col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">Cost Price</label>
+                <label class="sr-only" for="inlineFormInputGroup">Buying Price</label>
                 <div class="input-group mb-2">
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-arrow-up"></i></div>
                   </div>
-                  <input type="number" class="form-control" name="new_price" placeholder="Add product price" min="0">
+                  <input type="number" class="form-control" name="new_buyingprice" placeholder="Add buying price"
+                    min="0" id="buyingPrice">
                 </div>
               </div>
 
@@ -191,7 +200,8 @@
                   <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-arrow-down"></i></div>
                   </div>
-                  <input type="number" class="form-control" name="new_saleprice" placeholder="Add Sale price" min="0">
+                  <input type="number" class="form-control" name="new_saleprice" placeholder="Add Sale price" min="0"
+                    id="salePrice">
                 </div>
               </div>
 
@@ -221,7 +231,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-image"></i></div>
                 </div>
-                <input type="file" class="new_img" name="profile_img" placeholder="Select profile image">
+                <input type="file" class="new_img" name="new_img" placeholder="Select profile image">
               </div>
               <p>Max image size is 5MB</p>
               <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
@@ -238,8 +248,8 @@
           </div>
 
           <?php
-                // $product = new ProductsController();
-                // $product->store();
+                $product = new ProductsController();
+                $product->store();
             ?>
         </form>
       </div>

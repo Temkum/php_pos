@@ -115,3 +115,7 @@ $('#example').dataTable({
 
 }).destroy();
 ```
+
+## add products to db
+
+- make category dynamic from db

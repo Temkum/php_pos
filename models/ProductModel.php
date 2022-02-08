@@ -9,7 +9,7 @@ class ProductModel
         // check if data exist
         if ($item != null) {
             // get single category
-            $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item");
+            $stmt = Connection::connect()->prepare("SELECT * FROM $table WHERE $item = :$item ORDER BY id DESC");
 
             $stmt->bindParam(":". $item, $value, PDO::PARAM_STR);
             $stmt->execute();
@@ -21,6 +21,29 @@ class ProductModel
             $stmt->execute();
             
             return $stmt->fetchAll();
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+
+    public static function addProduct($table, $data)
+    {
+        $query = "INSERT INTO $table(category_id, code, description, image, stock, buying_price, sale_price) VALUES(:category_id, :code, :description, :image, :stock, :buying_price, :sale_price)";
+        $stmt = Connection::connect()->prepare($query);
+        $stmt->bindParam(':category_id', $data['category_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':code', $data['code'], PDO::PARAM_STR);
+        $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
+        $stmt->bindParam(':image', $data['image'], PDO::PARAM_STR);
+        $stmt->bindParam(':stock', $data['stock'], PDO::PARAM_STR);
+        $stmt->bindParam(':buying_price', $data['buying_price'], PDO::PARAM_STR);
+        $stmt->bindParam(':sale_price', $data['sale_price'], PDO::PARAM_STR);
+        // var_dump($data);
+        // return;
+
+        if ($stmt->execute()) {
+            return 'OK';
+        } else {
+            return 'error';
         }
         $stmt->close();
         $stmt = null;
