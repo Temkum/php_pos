@@ -20,7 +20,7 @@ class ProductsTable
           
         for ($i = 0; $i < count($products); $i++) {
             // import img
-            $image = "<img src='views/img/avatar.jpg' alt='Product image' width='50'>";
+            $image = "<img src='".$products[$i]["image"]."' alt='Product image' width='50'>";
 
             // import category
             $item = "id";

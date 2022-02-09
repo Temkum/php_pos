@@ -17,9 +17,54 @@ class ProductsController
             preg_match('/^[0-9]+$/', $_POST['new_stock']) &&
             preg_match('/^[0-9.]+$/', $_POST['new_buyingprice']) &&
             preg_match('/^[0-9.]+$/', $_POST['new_saleprice'])) {
-                $table = 'products';
-                $photo = 'views/img/avatar.jpg';
+            
+                /* validate img upload */
+                $photo = "views/img/avatar.jpg";
 
+                if (isset($_FILES["new_photo"]["tmp_name"])) {
+                    list($width, $height) = getimagesize($_FILES["new_photo"]["tmp_name"]);
+
+                    $new_height = 500;
+                    $new_width = 500;
+
+                    // create folder for each user
+                    $folder = "views/img/products/";
+
+                    if (!file_exists($folder)) {
+                        mkdir($folder, 0777);
+                    }
+
+                    if ($_FILES["new_photo"]["type"] == "image/png") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["new_code"] . $randomNumber;
+                        
+                        $photo = "views/img/products/". $img_name .".png";
+                        
+                        $srcImage = imagecreatefrompng($_FILES["new_photo"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
+
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+                        imagepng($destination, $photo);
+                    } elseif ($_FILES["new_photo"]["type"] == "image/jpeg") {
+                        $randomNumber = mt_rand(100, 999);
+                        $img_name = $_POST["new_code"] . $randomNumber;
+                        
+                        $photo = "views/img/products/". $img_name .".jpg";
+                        
+                        $srcImage = imagecreatefromjpeg($_FILES["new_photo"]["tmp_name"]);
+                        
+                        $destination = imagecreatetruecolor($new_width, $new_height);
+
+                        imagecopyresized($destination, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+                        imagejpeg($destination, $photo);
+                    }
+                }
+
+                $table = 'products';
+                
                 $data = ['category_id' => $_POST['new_category'],
                 'stock' => $_POST['new_stock'],
                 'buying_price' => $_POST['new_buyingprice'],

@@ -1,7 +1,7 @@
 <style>
-  .percent-checkbox {
-    justify-content: center;
-  }
+.percent-checkbox {
+  justify-content: center;
+}
 </style>
 
 <div class="content-wrapper">
@@ -41,8 +41,8 @@
         <div class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
             <div class="col-sm-12 table-responsive">
-              <table class="table table-bordered table-striped dataTable dtr-inline tables products-table" role="grid"
-                aria-describedby="example1_info">
+              <table id="example1" class="table table-bordered table-striped dataTable dtr-inline tables products-table"
+                role="grid" aria-describedby="example1_info">
                 <thead>
                   <tr role="row">
                     <th class="sorting">#</th>
@@ -157,7 +157,7 @@
               </div>
             </div>
 
-            <!-- <div class="col-auto">
+            <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup">Description</label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -165,11 +165,6 @@
                 </div>
                 <input type="text" class="form-control" name="new_desc" placeholder="Enter description">
               </div>
-            </div> -->
-
-            <div class="form-group">
-              <textarea class="form-control" rows="3" cols="30" placeholder="Enter description"
-                name="new_desc"></textarea>
             </div>
 
             <div class="col-auto">
@@ -230,7 +225,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-image"></i></div>
                 </div>
-                <input type="file" class="new_img" name="new_img" placeholder="Select profile image">
+                <input type="file" class="new_photo" name="new_photo" id="newProdPhoto">
               </div>
               <p>Max image size is 5MB</p>
               <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
