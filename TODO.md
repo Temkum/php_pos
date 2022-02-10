@@ -123,3 +123,10 @@ $('#example').dataTable({
 - upload product picture
 
 ### edit product
+
+- delete product feature
+
+## Client module
+
+- Build view template
+- use form plugin from admin template

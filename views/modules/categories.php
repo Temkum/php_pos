@@ -60,7 +60,7 @@
                           <td>'.$category['created_at'].'</td>
                           <td class="action">
                                 <button class="btn btn-warning btn-sm editCatBtn" data-toggle="modal" data-target="#editCategories" catID="'.$category['id'].'">
-                                    <i class="fa fa-edit"></i>
+                                    <i class="fa fa-pencil-alt"></i>
                                 </button>
                                 
                                 <button class="btn btn-danger btn-sm delCatBtn" catID="'.$category['id'].'">

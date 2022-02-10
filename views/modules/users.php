@@ -1,12 +1,12 @@
 <div class="content-wrapper">
   <style>
-    .modal-title {
-      text-transform: uppercase;
-    }
+  .modal-title {
+    text-transform: uppercase;
+  }
 
-    .sorting {
-      width: 10px;
-    }
+  .sorting {
+    width: 10px;
+  }
   </style>
 
   <section class="content-header">
@@ -95,7 +95,7 @@
                         echo '<td>'. $user["last_login"] .'</td>';
                         echo '<td class="action">
                       <button class="btn btn-warning btn-sm editUserBtn" data-toggle="modal" data-target="#editUser" userId="'.$user["id"].'">
-                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-pencil-alt"></i>
                       </button>
                       <button class="btn btn-danger btn-sm delUserBtn" userId="'.$user["id"].'" userPhoto="'.$user["photo"].'" userName="'.$user["username"].'">
                       <i class="fa fa-trash"></i></button>

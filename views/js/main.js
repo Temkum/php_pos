@@ -10,4 +10,7 @@ $(document).ready(function () {
     radioClass: "iradio_flat-yellow",
     increaseArea: "20%", // optional
   });
+
+  //Datemask for phone number input
+  $("#newPhone").inputmask({ mask: "(999) 999-9999" });
 });

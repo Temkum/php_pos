@@ -1,7 +1,7 @@
 <style>
-.percent-checkbox {
-  justify-content: center;
-}
+  .percent-checkbox {
+    justify-content: center;
+  }
 </style>
 
 <div class="content-wrapper">

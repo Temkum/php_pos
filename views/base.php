@@ -79,6 +79,9 @@ session_start();
   <script src="views/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
   <!-- icheck -->
   <script src="views/plugins/icheck/icheck.min.js"></script>
+  <!-- InputMask -->
+  <script src="views/plugins/moment/moment.min.js"></script>
+  <script src="views/plugins/inputmask/jquery.inputmask.min.js"></script>
 
   <!-- custom js -->
   <script type="text/javascript" src="views/js/user.js"></script>

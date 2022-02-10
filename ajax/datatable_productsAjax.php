@@ -37,7 +37,7 @@ class ProductsTable
             }
 
             // action btns
-            $buttons = "<button class='btn btn-warning btn-sm editProd-btn' data-toggle='modal' data-target='#editProduct' productID='".$products[$i]["id"]."'><i class='fa fa-edit'></i></button><button class='btn btn-danger btn-sm delProd-btn' productID='".$products[$i]["id"]."' code='".$products[$i]["code"]."' image='".$products[$i]["image"]."'><i class='fa fa-trash'></i></button>";
+            $buttons = "<button class='btn btn-warning btn-sm editProd-btn' data-toggle='modal' data-target='#editProduct' productID='".$products[$i]["id"]."'><i class='fa fa-pencil-alt'></i></button><button class='btn btn-danger btn-sm delProd-btn' productID='".$products[$i]["id"]."' code='".$products[$i]["code"]."' image='".$products[$i]["image"]."'><i class='fa fa-trash'></i></button>";
 
             // show data from db
             $jsonData .='[
