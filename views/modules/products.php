@@ -384,3 +384,6 @@
     </div>
   </div>
 </div>
+<?php
+$del_product = new ProductsController();
+$del_product->destroy();

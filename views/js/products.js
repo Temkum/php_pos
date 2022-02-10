@@ -136,4 +136,27 @@ $(document).ready(function () {
       },
     });
   });
+
+  /* DELETE product */
+  $(".products-table tbody").on("click", "button.delProd-btn", function () {
+    let productId = $(this).attr("productID");
+    const code = $(this).attr("code");
+    const image = $(this).attr("image");
+
+    // display delete prompt
+    Swal.fire({
+      title: "Are you sure you want to delete this product?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Yes, delete product!",
+    }).then(function (result) {
+      if (result.value) {
+        window.location = `index.php?route=products&productId=${productId}&image=${image}&code=${code}`;
+      }
+    });
+  });
 });

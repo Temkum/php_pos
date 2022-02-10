@@ -115,7 +115,7 @@ class ProductsController
                 /* validate img upload */
                 $photo = $_POST["old_image"];
 
-                if (isset($_FILES["edit_photo"]["tmp_name"])) {
+                if (isset($_FILES["edit_photo"]["tmp_name"]) && !empty($_FILES["edit_photo"]["tmp_name"])) {
                     list($width, $height) = getimagesize($_FILES["edit_photo"]["tmp_name"]);
 
                     $new_height = 500;
@@ -194,6 +194,34 @@ class ProductsController
                             window.location = "products";
                           }
                         });
+                    </script>';
+            }
+        }
+    }
+
+    public static function destroy()
+    {
+        if (isset($_GET['productId'])) {
+            $table = 'products';
+            $data = $_GET['productId'];
+
+            if ($_GET['image'] != '' && $_GET['image'] != 'views/img/avatar.jpg') {
+                unlink($_GET['image']);
+            }
+            $response = ProductModel::deleteProduct($table, $data);
+            
+            if ($response == "OK") {
+                echo'<script>
+                  Swal.fire({
+                      icon: "success",
+                      title: "Product has been successfully deleted",
+                      showConfirmButton: true,
+                      confirmButtonText: "Close",
+                      }).then(function(result){
+                          if (result.value) {
+                          window.location = "products";
+                          }
+                        })
                     </script>';
             }
         }
