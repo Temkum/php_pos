@@ -29,7 +29,9 @@ class ProductModel
     public static function addProduct($table, $data)
     {
         $query = "INSERT INTO $table(category_id, code, description, image, stock, buying_price, sale_price) VALUES(:category_id, :code, :description, :image, :stock, :buying_price, :sale_price)";
+        
         $stmt = Connection::connect()->prepare($query);
+        
         $stmt->bindParam(':category_id', $data['category_id'], PDO::PARAM_INT);
         $stmt->bindParam(':code', $data['code'], PDO::PARAM_STR);
         $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
@@ -44,6 +46,30 @@ class ProductModel
             return 'OK';
         } else {
             return 'error';
+        }
+        $stmt->close();
+        $stmt = null;
+    }
+
+    public static function modifyProduct($table, $data)
+    {
+        $sql = "UPDATE $table SET category_id=:category_id, description=:description, image=:image, stock=:stock, buying_price=:buying_price, sale_price=:sale_price WHERE code=:code";
+
+        $stmt = Connection::connect()->prepare($sql);
+
+        $stmt->bindParam(':category_id', $data['category_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':code', $data['code'], PDO::PARAM_STR);
+        $stmt->bindParam(':description', $data['description'], PDO::PARAM_STR);
+        $stmt->bindParam(':image', $data['image'], PDO::PARAM_STR);
+        $stmt->bindParam(':stock', $data['stock'], PDO::PARAM_STR);
+        $stmt->bindParam(':buying_price', $data['buying_price'], PDO::PARAM_STR);
+        $stmt->bindParam(':sale_price', $data['sale_price'], PDO::PARAM_STR);
+        
+
+        if ($stmt->execute()) {
+            return "OK";
+        } else {
+            return "error";
         }
         $stmt->close();
         $stmt = null;

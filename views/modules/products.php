@@ -251,3 +251,136 @@
     </div>
   </div>
 </div>
+
+<!-- EDIT Product Modal -->
+<div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header mb-3">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+          <div class="form-row align-items-center">
+
+            <div class="col-auto col-7">
+              <label class="sr-only" for="inlineFormInputGroup">Category</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-th"></i></div>
+                </div>
+                <select class="custom-select" name="edit_category" id="editCategory" readonly>
+                  <option id="editCat"></option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Product Code</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-code"></i></div>
+                </div>
+                <input type="text" class="form-control" name="edit_code" id="editCode" placeholder="Product code"
+                  readonly>
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Description</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-align-left"></i></div>
+                </div>
+                <input type="text" class="form-control" name="edit_desc" id="editDesc">
+              </div>
+            </div>
+
+            <div class="col-auto">
+              <label class="sr-only" for="inlineFormInputGroup">Stock</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-check"></i></div>
+                </div>
+                <input type="number" class="form-control" name="edit_stock" min="0" id="editStock">
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6 col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Buying Price</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-arrow-up"></i></div>
+                  </div>
+                  <input type="number" class="form-control" name="edit_buyingprice" id="editBuyingPrice" step="any"
+                    min="0">
+                </div>
+              </div>
+
+              <div class="col-md-6 col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Sale price</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-arrow-down"></i></div>
+                  </div>
+                  <input type="number" class="form-control" name="edit_saleprice" min="0" step="any" id="editSalePrice"
+                    readonly>
+                </div>
+              </div>
+
+              <!-- percentage checkbox -->
+              <div class="percent-checkbox input-group">
+                <div class="col-4 text-center form-check">
+                  <div class="form-group">
+                    <input type="checkbox" class="check percentage" checked>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="input-group mb-2">
+                    <input type="number" class="form-control new-percentage" min="0" value="40" required>
+                    <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-percent"></i></div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-8">
+              <label>Product Image</label>
+              <div class="input-group mb-2">
+                <!-- <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-image"></i></div>
+                </div> -->
+                <input type="file" class="new_photo" name="edit_photo" id="editProdPhoto">
+              </div>
+              <p>Max image size is 5MB</p>
+              <img src="views/img/avatar.jpg" alt="" width="50" class="img-thumbnail preview">
+              <input type="hidden" name="old_image" id="oldImage">
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-primary mb-2">Update Product</button>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+          <?php
+                $modify_product = new ProductsController();
+                $modify_product->modify();
+            ?>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
