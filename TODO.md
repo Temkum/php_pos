@@ -130,3 +130,6 @@ $('#example').dataTable({
 
 - Build view template
 - use form plugin from admin template
+
+- add clients to db
+- select clients and display to view

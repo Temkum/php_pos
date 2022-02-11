@@ -55,25 +55,31 @@
                 </thead>
                 <tbody>
                   <?php
-                        // $item = null;
-                        // $value = null;
-                        // $categories = CategoriesController::display($item, $value);
+                        $item = null;
+                        $value = null;
+                        $clients = ClientsController::display($item, $value);
 
-                        // foreach ($categories as $key => $category) {
-                        //     echo '<tr class="odd">
-                        //   <td class="dtr-control sorting_1" tabindex="0">'.($key + 1).'</td>
-                        //   <td>'.$category['category_name'].'</td>
-                        //   <td>'.$category['created_at'].'</td>
-                        //   <td class="action">
-                        //         <button class="btn btn-warning btn-sm editCatBtn" data-toggle="modal" data-target="#editCategories" catID="'.$category['id'].'">
-                        //             <i class="fa fa-edit"></i>
-                        //         </button>
+                        foreach ($clients as $key => $client) {
+                            echo '<tr class="odd">
+                          <td class="dtr-control sorting_1" tabindex="0">'.($key + 1).'</td>
+                          <td>'.$client['name'].'</td>
+                          <td>'.$client['document_id'].'</td>
+                          <td>'.$client['email'].'</td>
+                          <td>'.$client['phone'].'</td>
+                          <td>'.$client['address'].'</td>
+                          <td>'.$client['purchases'].'</td>
+                          <td>'.$client['last_login'].'</td>
+                          <td>'.$client['created_at'].'</td>
+                          <td class="action">
+                                <button class="btn btn-warning btn-sm editCatBtn" data-toggle="modal" data-target="#editClient" clientID="'.$client['id'].'">
+                                    <i class="fa fa-pencil-alt text-white"></i>
+                                </button>
                                 
-                        //         <button class="btn btn-danger btn-sm delCatBtn" catID="'.$category['id'].'">
-                        //         <i class="fa fa-trash"></i></button>
-                        //     </td>
-                        //     </tr>';
-                        // }
+                                <button class="btn btn-danger btn-sm delClient-Btn" catID="'.$client['id'].'">
+                                <i class="fa fa-trash"></i></button>
+                            </td>
+                            </tr>';
+                        }
                     ?>
                 </tbody>
               </table>
@@ -161,8 +167,8 @@
           </div>
 
           <?php
-                $add_cat = new CategoriesController();
-                $add_cat->store();
+                $add_client = new ClientsController();
+                $add_client->store();
             ?>
         </form>
       </div>
