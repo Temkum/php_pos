@@ -71,11 +71,11 @@
                           <td>'.$client['last_login'].'</td>
                           <td>'.$client['created_at'].'</td>
                           <td class="action">
-                                <button class="btn btn-warning btn-sm editCatBtn" data-toggle="modal" data-target="#editClient" clientID="'.$client['id'].'">
+                                <button class="btn btn-warning btn-sm editClient-Btn" data-toggle="modal" data-target="#editClient" clientID="'.$client['id'].'">
                                     <i class="fa fa-pencil-alt text-white"></i>
                                 </button>
                                 
-                                <button class="btn btn-danger btn-sm delClient-Btn" catID="'.$client['id'].'">
+                                <button class="btn btn-danger btn-sm delClient-Btn" clientID="'.$client['id'].'">
                                 <i class="fa fa-trash"></i></button>
                             </td>
                             </tr>';
@@ -91,7 +91,7 @@
   </section>
 </div>
 
-<!-- Add category Modal -->
+<!-- Add client Modal -->
 <div class="modal fade" id="addCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -169,6 +169,97 @@
           <?php
                 $add_client = new ClientsController();
                 $add_client->store();
+            ?>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- EDIT client Modal -->
+<div class="modal fade" id="editClient" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header mb-3">
+          <h5 class="modal-title" id="exampleModalLabel">Modify client</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <form method="POST">
+          <div class="form-row align-items-center">
+            <div class="col-auto col-md-10 col-12">
+              <label class="sr-only" for="inlineFormInputGroup">Client's Name</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input type="text" class="form-control" name="edit_name" placeholder="Modify Client's name"
+                  id="editName">
+                <input type="hidden" id="clientId" name="client_id">
+              </div>
+            </div>
+
+            <div class="col-auto col-md-10 col-12">
+              <label class="sr-only" for="inlineFormInputGroup">Document ID</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-tag"></i></div>
+                </div>
+                <input type="number" class="form-control" name="edit_docid" min="0" id="editDocId"
+                  placeholder="Modify Document ID">
+              </div>
+            </div>
+
+            <div class="col-auto col-md-10 col-12">
+              <label class="sr-only" for="inlineFormInputGroup">Email</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                </div>
+                <input type="email" class="form-control" name="edit_email" placeholder="Modify email" id="editEmail">
+              </div>
+            </div>
+
+            <div class="col-auto col-md-10 col-12">
+              <label class="sr-only" for="inlineFormInputGroup">Telephone</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                </div>
+                <input type="text" class="form-control" id="editPhone" name="edit_phone"
+                  placeholder="Modify Phone number" data-inputmask="'mask':'(999) 999-999-999'" data-mask
+                  inputmode="text" required>
+              </div>
+            </div>
+
+            <div class="col-auto col-md-10 col-12">
+              <label class="sr-only" for="inlineFormInputGroup">Address</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-home"></i></div>
+                </div>
+                <input type="text" class="form-control" name="edit_address" placeholder="Modify address"
+                  id="editAddress">
+              </div>
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-primary mb-2">Update client</button>
+            </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+
+          <?php
+                $edit_client = new ClientsController();
+                $edit_client->update();
             ?>
         </form>
       </div>

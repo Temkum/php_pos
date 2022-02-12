@@ -12,5 +12,5 @@ $(document).ready(function () {
   });
 
   //Datemask for phone number input
-  $("#newPhone").inputmask({ mask: "(999) 999-9999" });
+  $("#newPhone").inputmask({ mask: "(999) 999-999-999" });
 });
