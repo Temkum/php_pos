@@ -133,3 +133,4 @@ $('#example').dataTable({
 
 - add clients to db
 - select clients and display to view
+- select client

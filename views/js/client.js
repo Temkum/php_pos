@@ -1,6 +1,5 @@
 $(function () {
   /* Edit client */
-  // $(".tables ").on("click", "tbody .editClient-Btn", function () {
   $(".editClient-Btn").on("click", function () {
     let clientId = $(this).attr("clientID");
 
@@ -25,4 +24,25 @@ $(function () {
       },
     });
   });
+
+  // delete client
+  $(".delClient-Btn").on("click", function () {
+     let clientId = $(this).attr("clientID");
+
+    Swal.fire({
+      title: "Are you sure you want to delete client?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      cancelButtonText: "Cancel",
+      confirmButtonText: "Yes, delete client!",
+    }).then(function (result) {
+      if (result.value) {
+        window.location = `index.php?route=clients&clientId=${clientId}`;
+      }
+    });
+  });
+
 });

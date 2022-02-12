@@ -103,4 +103,31 @@ class ClientsController
             }
         }
     }
+
+     /* Delete client */
+    public static function destroy()
+    {
+        if (isset($_GET["clientId"])) {
+            $table ="clients";
+            $data = $_GET["clientId"];
+
+            $response = ClientModel::deleteClient($table, $data);
+            // var_dump($response);
+
+            if ($response == "OK") {
+                echo'<script>
+                  Swal.fire({
+                      icon: "success",
+                      title: "Client has been successfully deleted",
+                      showConfirmButton: true,
+                      confirmButtonText: "Close",
+                      }).then(function(result){
+                          if (result.value) {
+                          window.location = "clients";
+                          }
+                        })
+                    </script>';
+            }
+        }
+    }
 }

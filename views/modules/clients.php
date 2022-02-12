@@ -71,7 +71,7 @@
                           <td>'.$client['last_login'].'</td>
                           <td>'.$client['created_at'].'</td>
                           <td class="action">
-                                <button class="btn btn-warning btn-sm editClient-Btn" data-toggle="modal" data-target="#editClient" clientID="'.$client['id'].'">
+                                <button class="btn btn-success btn-sm editClient-Btn" data-toggle="modal" data-target="#editClient" clientID="'.$client['id'].'">
                                     <i class="fa fa-pencil-alt text-white"></i>
                                 </button>
                                 
@@ -267,3 +267,7 @@
     </div>
   </div>
 </div>
+
+<?php
+$del_client = new ClientsController();
+$del_client->destroy();
