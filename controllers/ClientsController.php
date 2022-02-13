@@ -36,7 +36,7 @@ class ClientsController
                 echo '<script>
                       Swal.fire({
                         icon: "error",
-                        title: "Fields cannot be black or no special characters allowed!",
+                        title: "Fields cannot be blank or no special characters allowed!",
                         timer: 5000						
                         }).then((result)=>{
                           if(result.value){
@@ -104,7 +104,7 @@ class ClientsController
         }
     }
 
-     /* Delete client */
+    /* Delete client */
     public static function destroy()
     {
         if (isset($_GET["clientId"])) {

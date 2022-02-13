@@ -40,7 +40,7 @@
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                <i class="right fas fa-angle-left"></i>
+                <!-- <i class="right fas fa-angle-left"></i> -->
               </p>
             </a>
           </li>
@@ -50,7 +50,7 @@
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
-                <span class="right badge badge-danger">New</span>
+                <!-- <span class="right badge badge-danger">New</span> -->
               </p>
             </a>
           </li>
@@ -64,7 +64,7 @@
           </li>
           <li class="nav-item">
             <a href="products" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-barcode"></i>
               <p>
                 Products
               </p>
@@ -80,25 +80,24 @@
           </li>
           <li class="nav-item">
             <a href="sales" class="nav-link">
-              <i class="nav-icon fas fa-briefcase"></i>
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Sales
               </p>
             </a>
           </li>
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-header"></li>
           <li class="nav-item">
             <a href="create-sale" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon fas fa-shopping-basket"></i>
               <p>
                 Create Sales
-                <span class="badge badge-info right">2</span>
               </p>
             </a>
           </li>
           <li class="nav-item">
             <a href="reports" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Reports
               </p>
