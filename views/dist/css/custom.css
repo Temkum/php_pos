@@ -24,3 +24,13 @@
   text-transform: uppercase;
   font-weight: bold;
 }
+
+.hidden-lg {
+  display: none;
+}
+
+@media (max-width: 425px) {
+  .hidden-lg {
+    display: block;
+  }
+}

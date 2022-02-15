@@ -32,19 +32,21 @@
     </div>
   </section>
 
+  <!-- Main content -->
   <section class="content">
     <div class="card">
       <div class="card-body">
         <div class="row">
+          <!-- ADD SALE table -->
           <div class="col-lg-5 col-xs-12">
-            <!-- Sales table -->
             <div class="card card-primary">
               <div class="card-header">
                 <h4 class="card-title">Add Sale</h4>
               </div>
+
               <div class="card-body">
                 <!-- sales form -->
-                <form action="POST" class="sales-form">
+                <form method="POST" class="sales-form">
                   <div class="form-row align-items-center">
                     <div class="col-12">
                       <label class="sr-only" for="inlineFormInputGroup">Vendor</label>
@@ -114,9 +116,8 @@
                       </div>
                     </div>
 
-                    <div class="col-12">
-                      <div class="row prod-sale-row">
-                        <!-- <div class="col-12 mb-2">
+                    <div class="row prod-sale-row">
+                      <!-- <div class="col-12 mb-2">
                         <label class="sr-only" for="inlineFormInputGroup">Products</label>
                         <div class="row mb-2 ">
                           <div class="input-group mb-2 col-md-6 col-sm-12">
@@ -143,7 +144,6 @@
                             class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
                             products</button> <br>
                         </div>-->
-                      </div>
                     </div>
 
                     <div class="col-12">
@@ -176,6 +176,56 @@
                         </div>
                       </div>
                     </div>
+
+                    <!-- <div class="col-12 col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Taxes</label>
+                      <div class="row">
+                        <table class="table col-md-9">
+                          <thead>
+                            <tr>
+                              <th>Taxes</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="">
+                                <div class="input-group mb-2 col-md-9">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                      Taxes
+                                    </div>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="0.00" min="1" required>
+                                  <div class="input-group-append">
+                                    <div class="input-group-text">
+                                      <i class="fas fa-percent"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="">
+                                <div class="input-group mb-2 col-auto">
+                                  <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                      <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                  </div>
+                                  <input type="number" class="form-control" placeholder="0.00" min="1" required
+                                    readonly>
+                                  <div class="input-group-append">
+                                    <div class="input-group-text">
+                                      Total
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div> -->
+                    <hr>
 
                     <div class="col-12">
                       <div class="form-group row text-center">
@@ -210,56 +260,61 @@
                         Sale</button>
                     </div>
 
-
-                  </div><!-- form row end -->
-                </form>
-
-              </div><!-- card body end -->
-            </div>
-
-          </div>
-
-          <!-- Products table -->
-          <div class="col-lg-7 col-xs-12">
-            <div class="card card-warning">
-              <div class="card-header ">
-                <h4 class="card-title">Products</h4>
+                  </div><!-- form row  -->
               </div>
 
-              <div class="card-body">
-                <div class="col-sm-12 table-responsive">
-                  <table id="example1"
-                    class="table table-bordered table-striped dataTable dtr-inline tables table-sm sales-table"
-                    role="grid" aria-describedby="example1_info">
-                    <thead>
-                      <tr role="row">
-                        <th class="sorting">#</th>
-                        <th class="">Code</th>
-                        <th class="">Description</th>
-                        <th class="">Image</th>
-                        <th class="">Stock</th>
-                        <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                          aria-label="CSS grade: activate to sort column ascending">Action
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!--add products using js -->
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <?php
+                        // $add_client = new ClientsController();
+                        // $add_client->store();
+                ?>
+              </form>
             </div>
-
           </div>
-
         </div>
 
+      </div><!-- end row-->
+
+      <!-- PRODUCTS table -->
+      <div class="col-lg-7 col-xs-12">
+        <div class="card card-warning">
+          <div class="card-header ">
+            <h4 class="card-title">Products</h4>
+          </div>
+
+          <div class="card-body">
+            <div class="col-sm-12 table-responsive">
+              <table id="example1"
+                class="table table-bordered table-striped dataTable dtr-inline tables table-sm sales-table" role="grid"
+                aria-describedby="example1_info">
+                <thead>
+                  <tr role="row">
+                    <th class="sorting">#</th>
+                    <th class="">Code</th>
+                    <th class="">Description</th>
+                    <th class="">Image</th>
+                    <th class="">Stock</th>
+                    <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                      aria-label="CSS grade: activate to sort column ascending">Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!--add products using js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
-  </section>
-</div>
+
+    </div> <!-- end card -->
+    </div><!-- end content wrapper -->
+    <div class="card-footer"></div>    
+
+  </section><!-- end content -->
+
 
 <!-- Add client Modal -->
 <div class="modal fade" id="addCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog">

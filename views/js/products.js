@@ -11,6 +11,9 @@ $(document).ready(function () {
   $(".products-table")
     .DataTable({
       ajax: "ajax/datatable_productsAjax.php",
+      deferRender: true,
+      retrieve: true,
+      processing: true,
     })
     .destroy();
 

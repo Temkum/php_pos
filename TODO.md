@@ -138,3 +138,8 @@ $('#example').dataTable({
 ## Sales module
 
 - build view template
+- add sales
+
+  - load products
+
+> adding sales part 3 - ended 5:30min

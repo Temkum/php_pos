@@ -88,6 +88,7 @@ session_start();
   <script type="text/javascript" src="views/js/category.js"></script>
   <script type="text/javascript" src="views/js/products.js"></script>
   <script type="text/javascript" src="views/js/client.js"></script>
+  <script type="text/javascript" src="views/js/sales.js"></script>
   <script type="text/javascript" src="views/js/main.js"></script>
 </body>
 
