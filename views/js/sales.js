@@ -7,14 +7,12 @@ $(function () {
   }); */
 
   // data table ex
-  $(".sales-table")
-    .DataTable({
-      ajax: "ajax/datatable_salesAjax.php",
-      deferRender: true,
-      retrieve: true,
-      processing: true,
-    })
-    .destroy();
+  $(".sales-table").DataTable({
+    ajax: "ajax/datatable_salesAjax.php",
+    deferRender: true,
+    retrieve: true,
+    processing: true,
+  });
 
   // add product on sales input
   $(".sales-table tbody").on("click", ".add-product", function () {
@@ -40,7 +38,7 @@ $(function () {
         let stock = response["stock"];
         let price = response["sale_price"];
 
-        /*  let markup =
+        let prodMarkup =
           '<div class="input-group mb-2 col-md-6 col-sm-12">' +
           '<div class="input-group-prepend remove-product btn" productId="' +
           productId +
@@ -70,13 +68,29 @@ $(function () {
           "</div>" +
           "</div>" +
           '<button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add product</button>' +
-          "<br>"; */
-        let prodMarkup = `<div class="col-12">
+          "<br>";
+
+        // check if there's available stock
+        if (stock == 0) {
+          Swal.fire({
+            title: "Out of stock",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
+          $("button[productId='" + productId + '"]').addClass("btn-primary");
+          /* $(`button[productId='${productId[id]["productId"]}`).addClass(
+            "btn-primary"
+          ); */
+
+          return;
+        }
+
+        /* let prodMarkup = `<div class="col-12">
                         <label class="sr-only" for="inlineFormInputGroup">Products</label>
                         <div class="row mb-2">
                           <div class="input-group mb-2 col-md-6 col-sm-12">
                             <div class="input-group-prepend">
-                              <div class="input-group-text btn remove-product" productId="${productId}">
+                              <div class="input-group-text btn remove-product removeProduct" productId="${productId}">
                                 <i class="fa fa-trash"></i>
                               </div>
                             </div>
@@ -97,25 +111,51 @@ $(function () {
                           <button type="button"
                             class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
                             products</button> <br>
-                        </div>`;
-        // $(".prod-sale-row").append(markup);
+                        </div>`; */
+
         $(".prod-sale-row").append(prodMarkup);
       },
     });
   });
+
+  $(".sales-table").on("draw.dt", function () {
+    if (localStorage.getItem("removeProduct") != null) {
+      let prodListId = JSON.parse(localStorage.getItem("removeProduct"));
+
+      for (let i = 0; i < prodListId.length; i++) {
+        $(
+          "button.recover-btn[productId='" + prodListId[i]["productId"] + "']"
+        ).removeClass("btn-primary");
+        $(
+          "button.recover-btn[productId='" + prodListId[i]["productId"] + "']"
+        ).addClass("btn-primary add-product");
+      }
+    }
+  });
+
+  let removeProductId = [];
+  // let removeProduct;
 
   /* Delete sale product and recover btn */
   $(".sales-form").on("click", ".remove-product", function () {
     $(this).parent().parent().parent().remove();
     let productId = $(this).attr("productId");
 
+    // store product in local storage
+    if (localStorage.getItem("removeProduct") == null) {
+      removeProductId = [];
+    } else {
+      removeProductId.concat(localStorage.getItem("removeProduct"));
+    }
+    removeProduct.push("productId", productId);
+    localStorage.setItem("removeProduct", JSON.stringify(removeProductId));
+
     // change state of btns
     $("button.recover-btn[productId='" + productId + "']").removeClass(
-      "btn-default"
+      "btn-primary add-product"
     );
     $("button.recover-btn[productId='" + productId + "']").addClass(
-      "btn-default add-product"
+      "btn-primary add-product"
     );
-    // console.log("btn");
   });
 });
