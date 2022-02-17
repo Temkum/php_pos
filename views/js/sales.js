@@ -104,7 +104,7 @@ $(function () {
                             <input type="number" class="form-control new-prod-qty" name="new_prod_qty" min="1" value="1" stock="${stock}" required>
                           </div>
 
-                          <div class="input-group mb-2 col-md-4 col-xs-8">
+                          <div class="input-group mb-2 col-md-4 col-xs-8 enterPrice">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-dollar-sign"></i>
@@ -115,7 +115,7 @@ $(function () {
                           <br>
                         </div>`;
 
-        $(".prod-sale-row").append(prodMarkup);
+        $(".new-product").append(prodMarkup);
       },
     });
   });
@@ -168,6 +168,7 @@ $(function () {
   /* Add products with btn for smaller devices */
   $(".addProduct-btn").click(function () {
     productNum++;
+
     let data = new FormData();
     data.append("load_products", "OK");
 
@@ -193,20 +194,24 @@ $(function () {
                                 <option>Select product</option>
                               </select>
                           </div>
-                          <div class="input-group mb-2 col-md-2 col-sm-3">
-                            <input type="number" class="form-control" min="1" required value="${stock}" name="new_prod_stock" stock>
+
+                          <div class="input-group mb-2 col-md-2 col-sm-3 enterQuantity">
+                            <input type="number" class="form-control new-prod-stock" min="1"  value="1" name="new_prod_stock" stock newStock required>
                           </div>
-                          <div class="input-group mb-2 col-md-4 col-xs-8">
+
+                          <div class="input-group mb-2 col-md-4 col-xs-8 enterPrice">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-dollar-sign"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control" placeholder="0.00" readonly min="1" required value="${price}" name="new_prod_price">
+                            <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" required>
                           </div> <br>
                         </div>`;
+
         $(".new-product").append(prodMarkup);
 
+        // add product to the select element
         response.forEach(foreachFunc);
 
         function foreachFunc(item, index) {
@@ -229,14 +234,14 @@ $(function () {
   /* Select product */
   $(".sales-form").on("change", "select.new-prod-desc", function () {
     let prodName = $(this).val();
-    let newProdPrice = $(this).parent();
+
     let newProductDescription = $(this)
       .parent()
       .parent()
       .parent()
       .children()
       .children()
-      .children(".newProductDescription");
+      .children(".new-prod-desc");
 
     let newProductPrice = $(this)
       .parent()
@@ -244,14 +249,14 @@ $(function () {
       .parent()
       .children(".enterPrice")
       .children()
-      .children(".newProductPrice");
+      .children(".new-prod-price");
 
     let newProductQuantity = $(this)
       .parent()
       .parent()
       .parent()
       .children(".enterQuantity")
-      .children(".newProductQuantity");
+      .children(".new-prod-stock");
 
     let data = new FormData();
     data.append("prodName", prodName);
@@ -265,7 +270,7 @@ $(function () {
       processData: false,
       dataType: "json",
       success: function (response) {
-        $(newProductDescription).attr("stock", response["stock"]);
+        $(newProductDescription).attr("productId", response["id"]);
         $(newProductQuantity).attr("stock", response["stock"]);
         $(newProductPrice).val(response["sale_price"]);
       },

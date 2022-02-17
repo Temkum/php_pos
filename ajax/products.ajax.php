@@ -67,8 +67,8 @@ if (isset($_POST['load_products'])) {
 }
 
 // Get product name
-if (isset($_POST['load_products'])) {
+if (isset($_POST['product_name'])) {
     $load_products = new AjaxProducts();
-    $load_products->product_name = $_POST['load_products'];
+    $load_products->product_name = $_POST['product_name'];
     $load_products->ajaxProductEdit();
 }

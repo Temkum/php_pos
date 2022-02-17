@@ -118,6 +118,7 @@
                       <div class="row prod-sale-row new-product">
 
                       </div>
+
                       <button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
                         products</button> <br>
                     </div>
