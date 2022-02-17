@@ -115,7 +115,7 @@
                     </div>
 
                     <div class="col-12">
-                      <div class="row prod-sale-row">
+                      <div class="row prod-sale-row new-product">
                         <!-- <div class="col-12 mb-2">
                         <label class="sr-only" for="inlineFormInputGroup">Products</label>
                         <div class="row mb-2 ">
@@ -125,7 +125,7 @@
                                 <i class="fa fa-trash"></i>
                               </div>
                             </div>
-                            <input type="text" class="form-control" name="product_desc" id="productDesc" value=""
+                            <input type="text" class="form-control" name="product_desc" id="addProduct" value=""
                               placeholder="Product description" required>
                           </div>
                           <div class="input-group mb-2 col-md-2 col-sm-3">
@@ -144,6 +144,8 @@
                             products</button> <br>
                         </div>-->
                       </div>
+                      <button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
+                        products</button> <br>
                     </div>
 
                     <div class="col-12">
@@ -220,7 +222,7 @@
           </div>
 
           <!-- Products table -->
-          <div class="col-lg-7 col-xs-12">
+          <div class="col-lg-7 col-xs-12 hidden">
             <div class="card card-warning">
               <div class="card-header ">
                 <h4 class="card-title">Products</h4>

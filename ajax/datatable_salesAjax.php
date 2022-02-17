@@ -28,7 +28,7 @@ class SalesTable
             }
 
             // action btns
-            $buttons = "<button class='btn btn-primary btn-sm add-product recover-btn' productID='".$products[$i]["id"]."'>Add</button>";
+            $buttons = "<button class='btn btn-primary btn-sm add-product recover_btn' productID='".$products[$i]["id"]."'>Add</button>";
 
             // show data from db
             $jsonData .='[
