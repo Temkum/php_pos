@@ -14,7 +14,7 @@ $(function () {
     processing: true,
   });
 
-  // add product on sales input
+  /* add product to the sales from products table */
   $(".sales-table tbody").on("click", ".add-product", function () {
     let productId = $(this).attr("productID");
 
@@ -70,31 +70,6 @@ $(function () {
           '<button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add product</button>' +
           "<br>"; */
 
-        let prodMarkup = `<div class="col-12">
-                        <label class="sr-only" for="inlineFormInputGroup">Products</label>
-                        <div class="row mb-2">
-                          <div class="input-group mb-2 col-md-6 col-sm-12">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text btn remove_product recover_btn" productId="${productId}">
-                                <i class="fa fa-trash"></i>
-                              </div>
-                            </div>
-                            <input type="text" class="form-control" name="add_product" id="addProduct" value="${description}"
-                              placeholder="Product description" required>
-                          </div>
-                          <div class="input-group mb-2 col-md-2 col-sm-3">
-                            <input type="number" class="form-control" placeholder="0" min="1" required value="${stock}">
-                          </div>
-                          <div class="input-group mb-2 col-md-4 col-xs-8">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-dollar-sign"></i>
-                              </div>
-                            </div>
-                            <input type="number" class="form-control" placeholder="0.00" readonly min="1" required vale="${price}">
-                          </div> <br>
-                        </div>`;
-
         // check if there's available stock
         if (stock == 0) {
           Swal.fire({
@@ -102,63 +77,95 @@ $(function () {
             icon: "error",
             confirmButtonText: "Close",
           });
-          $("div[productId='" + productId + '"]').addClass("btn-primary");
-          /* $(`button[productId='${productId[id]["productId"]}`).addClass(
-            "btn-primary"
+          /* $("div[productId='" + productId + '"]').addClass(
+            "btn-primary add-product"
           ); */
+          $(`button[productId='${productId}`).addClass(
+            "btn-primary add-product"
+          );
 
           return;
         }
+
+        let prodMarkup = `<div class="col-12">
+                        <label class="sr-only" for="inlineFormInputGroup">Products</label>
+                        <div class="row mb-2">
+
+                          <div class="input-group mb-2 col-md-6 col-sm-12">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text btn remove_product" productId="${productId}">
+                                <i class="fa fa-trash"></i>
+                              </div>
+                            </div>
+                            <input type="text" class="form-control new-prod-desc" name="add_product" productId="${productId}" value="${description}" required>
+                          </div>
+
+                          <div class="input-group mb-2 col-md-2 col-sm-3">
+                            <input type="number" class="form-control new-prod-qty" name="new_prod_qty" min="1" value="1" stock="${stock}" required>
+                          </div>
+
+                          <div class="input-group mb-2 col-md-4 col-xs-8">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i class="fas fa-dollar-sign"></i>
+                              </div>
+                            </div>
+                            <input type="number" class="form-control new-prod-price" name="new_prod_price" min="1"  value="${price}" readonly required>
+                          </div>
+                          <br>
+                        </div>`;
 
         $(".prod-sale-row").append(prodMarkup);
       },
     });
   });
 
+  // load table during navigation
   $(".sales-table").on("draw.dt", function () {
     if (localStorage.getItem("remove_product") != null) {
       let prodListId = JSON.parse(localStorage.getItem("remove_product"));
 
       for (let i = 0; i < prodListId.length; i++) {
         $(
-          "button.recover_btn[productId='" + prodListId[i]["productId"] + "']"
-        ).removeClass("btn-primary");
+          "button.recover-btn[productId='" + prodListId[i]["productId"] + "']"
+        ).removeClass("btn-default");
         $(
-          "button.recover_btn[productId='" + prodListId[i]["productId"] + "']"
+          "button.recover-btn[productId='" + prodListId[i]["productId"] + "']"
         ).addClass("btn-primary add-product");
       }
     }
   });
 
   let removeProductId = [];
-  let removeProduct;
+
+  localStorage.removeItem("remove_product");
 
   /* Delete sale product and recover btn */
   $(".sales-form").on("click", "div.remove_product", function () {
     $(this).parent().parent().parent().remove();
     let productId = $(this).attr("productId");
 
-    // store product in local storage
+    // store product ID in local storage before we delete
     if (localStorage.getItem("remove_product") == null) {
       removeProductId = [];
     } else {
       removeProductId.concat(localStorage.getItem("remove_product"));
     }
-    removeProduct.push("productId", productId);
+    removeProductId.push("productId", productId);
     localStorage.setItem("remove_product", JSON.stringify(removeProductId));
 
     // change state of btns
-    $("div.recover_btn[productId='" + productId + "']").removeClass(
-      "btn-primary add-product"
+    $("button.recover-btn[productId='" + productId + "']").removeClass(
+      "btn-default"
     );
-    $("div.recover_btn[productId='" + productId + "']").addClass(
+    $("button.recover-btn[productId='" + productId + "']").addClass(
       "btn-primary add-product"
     );
   });
 
   let productNum = 0;
 
-  /* Add products with btn for smaller devices*/
+  /* Add products with btn for smaller devices */
   $(".addProduct-btn").click(function () {
     productNum++;
     let data = new FormData();
@@ -178,7 +185,7 @@ $(function () {
                         <div class="row mb-2">
                           <div class="input-group mb-2 col-md-6 col-sm-12">
                             <div class="input-group-prepend">
-                              <div class="input-group-text btn remove_product recover_btn" productId>
+                              <div class="input-group-text btn remove_product" productId>
                                 <i class="fa fa-trash"></i>
                               </div>
                             </div>
@@ -264,6 +271,5 @@ $(function () {
       },
     });
   });
-
   // end
 });

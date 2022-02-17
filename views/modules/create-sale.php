@@ -116,33 +116,7 @@
 
                     <div class="col-12">
                       <div class="row prod-sale-row new-product">
-                        <!-- <div class="col-12 mb-2">
-                        <label class="sr-only" for="inlineFormInputGroup">Products</label>
-                        <div class="row mb-2 ">
-                          <div class="input-group mb-2 col-md-6 col-sm-12">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fa fa-trash"></i>
-                              </div>
-                            </div>
-                            <input type="text" class="form-control" name="product_desc" id="addProduct" value=""
-                              placeholder="Product description" required>
-                          </div>
-                          <div class="input-group mb-2 col-md-2 col-sm-3">
-                            <input type="number" class="form-control" placeholder="0" min="1" required>
-                          </div>
-                          <div class="input-group mb-2 col-md-4 col-xs-8">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                <i class="fas fa-dollar-sign"></i>
-                              </div>
-                            </div>
-                            <input type="number" class="form-control" placeholder="0.00" readonly min="1" required>
-                          </div>
-                          <button type="button"
-                            class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
-                            products</button> <br>
-                        </div>-->
+
                       </div>
                       <button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
                         products</button> <br>
