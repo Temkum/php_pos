@@ -192,7 +192,7 @@ $(function () {
                             </div>
                             <select class=form-control new-prod-desc" productId name="new_prod_desc" id="product${productNum}" required>
                                 <option>Select product</option>
-                              </select>
+                            </select>
                           </div>
 
                           <div class="input-group mb-2 col-md-2 col-sm-3 enterQuantity">
@@ -205,7 +205,7 @@ $(function () {
                                 <i class="fas fa-dollar-sign"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" required>
+                            <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" value="" required>
                           </div> <br>
                         </div>`;
 
@@ -232,6 +232,52 @@ $(function () {
   });
 
   /* Select product */
+  $(".sales-form").on("change", "select.new-prod-desc", function () {
+    let prodName = $(this).val();
+
+    let newProductDescription = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .children()
+      .children()
+      .children(".new-prod-desc");
+
+    let newProductPrice = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .children()
+      .children()
+      .children(".new-prod-price");
+
+    let newProductQuantity = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .children()
+      .children(".new-prod-stock");
+
+    let data = new FormData();
+    data.append("prodName", prodName);
+
+    $.ajax({
+      url: "ajax/products.ajax.php",
+      method: "POST",
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      dataType: "json",
+      success: function (response) {
+        $(newProductDescription).attr("productId", response["id"]);
+        $(newProductQuantity).attr("stock", response["stock"]);
+        $(newProductPrice).val(response["sale_price"]);
+      },
+    });
+  });
+
+  // Modify quantity
   $(".sales-form").on("change", "select.new-prod-desc", function () {
     let prodName = $(this).val();
 
@@ -276,5 +322,6 @@ $(function () {
       },
     });
   });
+
   // end
 });

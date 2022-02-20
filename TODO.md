@@ -140,6 +140,7 @@ $('#example').dataTable({
 - build view template
 - add sales
 
-  - load products
+- load products
+- Add products from small screen devices
 
 > adding sales part 3 - ended 5:30min

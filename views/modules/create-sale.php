@@ -1,18 +1,18 @@
 <style>
-/* .box-success {
+  /* .box-success {
   color: green;
 } */
-.w-30 {
-  width: 30%;
-}
+  .w-30 {
+    width: 30%;
+  }
 
-.w-50 {
-  width: 50%;
-}
+  .w-50 {
+    width: 50%;
+  }
 
-.w-70 {
-  width: 70%;
-}
+  .w-70 {
+    width: 70%;
+  }
 </style>
 
 <div class="content-wrapper">
@@ -44,7 +44,7 @@
               </div>
               <div class="card-body">
                 <!-- sales form -->
-                <form action="POST" class="sales-form">
+                <form method="POST" class="sales-form">
                   <div class="form-row align-items-center">
                     <div class="col-12">
                       <label class="sr-only" for="inlineFormInputGroup">Vendor</label>
@@ -55,7 +55,8 @@
                           </div>
                         </div>
                         <input type="text" class="form-control" name="sale_vendor" id="saleVendor" placeholder="Vendor"
-                          value="<?= $_SESSION['name']?>" readonly>
+                          value="<?= $_SESSION['name']?>"
+                          readonly>
                         <input type="hidden" name="vendor_id" id="vendorId">
                       </div>
                     </div>
