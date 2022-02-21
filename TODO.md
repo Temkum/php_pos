@@ -143,5 +143,6 @@ $('#example').dataTable({
 - load products
 - Add products from small screen devices
 - modify qty of product
+- calculate prices of added product
 
 > adding sales part 3 - ended 5:30min

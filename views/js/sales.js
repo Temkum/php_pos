@@ -16,7 +16,7 @@ $(function () {
     })
     .destroy();
 
-  /* add product to the sales from products table */
+  /* Add product to the sales from products table */
   $(".sales-table tbody").on("click", ".add-product", function () {
     let productId = $(this).attr("productID");
 
@@ -40,38 +40,6 @@ $(function () {
         let stock = response["stock"];
         let price = response["sale_price"];
 
-        /* let prodMarkup =
-          '<div class="input-group mb-2 col-md-6 col-sm-12">' +
-          '<div class="input-group-prepend remove-product btn recover-btn" productId="' +
-          productId +
-          '">' +
-          '<div class="input-group-text">' +
-          '<i class="fa fa-trash"></i>' +
-          "</div>" +
-          "</div>" +
-          ' <input type="text" class="form-control"  name="product_desc" id="productDesc" value="' +
-          description +
-          '" placeholder="Product description" required readonly>' +
-          "</div>" +
-          '<div class="input-group mb-2 col-md-2 col-sm-3">' +
-          '<input type="number" class="form-control" value="1" min="1" name="new_stock" stock="' +
-          stock +
-          '" id="newStock" required>' +
-          "</div>" +
-          '<div class="input-group mb-2 col-md-4 col-xs-8">' +
-          '<div class="input-group-prepend">' +
-          '<div class="input-group-text">' +
-          '<i class="fas fa-dollar-sign"></i>' +
-          "</div>" +
-          "</div>" +
-          '<input type="number" class="form-control" value="' +
-          price +
-          '" readonly min="1" required name="new_price" id="newPrice">' +
-          "</div>" +
-          "</div>" +
-          '<button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add product</button>' +
-          "<br>"; */
-
         // check if there's available stock
         if (stock == 0) {
           Swal.fire({
@@ -89,7 +57,7 @@ $(function () {
           return;
         }
 
-        let prodMarkup = `<div class="col-12">
+        let prodMarkup = `
                         <label class="sr-only" for="inlineFormInputGroup">Products</label>
                         <div class="row mb-2">
 
@@ -115,9 +83,12 @@ $(function () {
                             <input type="number" class="form-control new-prod-price" realPrice="" name="new_prod_price" min="1"  value="${price}" readonly required>
                           </div>
                           <br>
-                        </div>`;
+                        `;
 
         $(".new-product").append(prodMarkup);
+
+        // Add total prod prices
+        grandTotal();
       },
     });
   });
@@ -163,6 +134,13 @@ $(function () {
     $("button.recover-btn[productId='" + productId + "']").addClass(
       "btn-primary add-product"
     );
+
+    if ($(".col-12.prod-sale-row").children().length == 0) {
+      $("#newTotalSale").val(0);
+    } else {
+      // Add total prod prices
+      grandTotal();
+    }
   });
 
   let productNum = 0;
@@ -183,7 +161,7 @@ $(function () {
       processData: false,
       dataType: "json",
       success: function (response) {
-        let prodMarkup = `<div class="col-12">
+        let prodMarkup = `
                         <label class="sr-only" for="inlineFormInputGroup">Products</label>
                         <div class="row mb-2">
                           <div class="input-group mb-2 col-md-6 col-sm-12">
@@ -209,7 +187,7 @@ $(function () {
                             </div>
                             <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" required>
                           </div> <br>
-                        </div>`;
+                       `;
 
         $(".new-product").append(prodMarkup);
 
@@ -229,6 +207,8 @@ $(function () {
             );
           }
         }
+        // Add total prod prices
+        grandTotal();
       },
     });
   });
@@ -298,6 +278,11 @@ $(function () {
       $(this).val(1);
       let stockCheck = $(this).attr("stock");
 
+      let finalPrice = $(this).val() * price.attr("realPrice");
+      price.val(finalPrice);
+
+      grandTotal();
+
       Swal.fire({
         title: "Your quantity is more than available stock",
         text: `Only ${stockCheck} units left!`,
@@ -305,7 +290,27 @@ $(function () {
         confirmButtonText: "Close",
       });
     }
+
+    // Add total prod prices
+    grandTotal();
   });
 
+  /* Add total product prices */
+  function grandTotal() {
+    let itemPrice = $(".new-prod-price");
+    let priceArr = [];
+
+    for (let i = 0; i < itemPrice.length; i++) {
+      priceArr.push(Number($(itemPrice[i]).val()));
+    }
+
+    function addPricesArr(totalSale, numberArray) {
+      return totalSale + numberArray;
+    }
+
+    let totalPriceSum = priceArr.reduce(addPricesArr);
+
+    $("#newTotalSale").val(totalPriceSum);
+  }
   // end
 });

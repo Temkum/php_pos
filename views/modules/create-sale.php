@@ -145,7 +145,8 @@
                               <i class="fas fa-dollar-sign"></i>
                             </div>
                           </div>
-                          <input type="number" class="form-control" placeholder="0.00" min="1" required readonly>
+                          <input type="number" class="form-control" placeholder="0.00" min="1" id="newTotalSale"
+                            name="new_total_sale" required readonly>
                           <div class="input-group-append">
                             <div class="input-group-text">
                               Total
