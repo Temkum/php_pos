@@ -7,12 +7,14 @@ $(function () {
   }); */
 
   // data table ex
-  $(".sales-table").DataTable({
-    ajax: "ajax/datatable_salesAjax.php",
-    deferRender: true,
-    retrieve: true,
-    processing: true,
-  });
+  $(".sales-table")
+    .DataTable({
+      ajax: "ajax/datatable_salesAjax.php",
+      deferRender: true,
+      retrieve: true,
+      processing: true,
+    })
+    .destroy();
 
   /* add product to the sales from products table */
   $(".sales-table tbody").on("click", ".add-product", function () {
@@ -104,13 +106,13 @@ $(function () {
                             <input type="number" class="form-control new-prod-qty" name="new_prod_qty" min="1" value="1" stock="${stock}" required>
                           </div>
 
-                          <div class="input-group mb-2 col-md-4 col-xs-8 enterPrice">
+                          <div class="input-group mb-2 col-md-4 col-xs-8 enter-price">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-dollar-sign"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control new-prod-price" name="new_prod_price" min="1"  value="${price}" readonly required>
+                            <input type="number" class="form-control new-prod-price" realPrice="" name="new_prod_price" min="1"  value="${price}" readonly required>
                           </div>
                           <br>
                         </div>`;
@@ -195,17 +197,17 @@ $(function () {
                             </select>
                           </div>
 
-                          <div class="input-group mb-2 col-md-2 col-sm-3 enterQuantity">
-                            <input type="number" class="form-control new-prod-stock" min="1"  value="1" name="new_prod_stock" stock newStock required>
+                          <div class="input-group mb-2 col-md-2 col-sm-3 enter-qty">
+                            <input type="number" class="form-control new-prod-qty" min="1"  value="1" name="new_prod_stock" stock newStock required>
                           </div>
 
-                          <div class="input-group mb-2 col-md-4 col-xs-8 enterPrice">
+                          <div class="input-group mb-2 col-md-4 col-xs-8 enter-price">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
                                 <i class="fas fa-dollar-sign"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" value="" required>
+                            <input type="number" class="form-control new-prod-price" readonly name="new_prod_price" realPrice="" required>
                           </div> <br>
                         </div>`;
 
@@ -248,6 +250,7 @@ $(function () {
       .parent()
       .parent()
       .children()
+      .children(".enter-price")
       .children()
       .children(".new-prod-price");
 
@@ -256,7 +259,7 @@ $(function () {
       .parent()
       .parent()
       .children()
-      .children(".new-prod-stock");
+      .children(".new-prod-qty");
 
     let data = new FormData();
     data.append("prodName", prodName);
@@ -273,54 +276,35 @@ $(function () {
         $(newProductDescription).attr("productId", response["id"]);
         $(newProductQuantity).attr("stock", response["stock"]);
         $(newProductPrice).val(response["sale_price"]);
+        $(newProductPrice).attr("realPrice", response["sale_price"]);
       },
     });
   });
 
-  // Modify quantity
-  $(".sales-form").on("change", "select.new-prod-desc", function () {
-    let prodName = $(this).val();
-
-    let newProductDescription = $(this)
+  /* Modify quantity */
+  $(".sales-form").on("change", "input.new-prod-qty", function () {
+    let price = $(this)
       .parent()
       .parent()
-      .parent()
-      .children()
-      .children()
-      .children(".new-prod-desc");
-
-    let newProductPrice = $(this)
-      .parent()
-      .parent()
-      .parent()
-      .children(".enterPrice")
+      .children(".enter-price")
       .children()
       .children(".new-prod-price");
 
-    let newProductQuantity = $(this)
-      .parent()
-      .parent()
-      .parent()
-      .children(".enterQuantity")
-      .children(".new-prod-stock");
+    let totalPrice = $(this).val() * price.attr("realPrice");
+    price.val(totalPrice);
 
-    let data = new FormData();
-    data.append("prodName", prodName);
+    // if qty entered is greater than stock, set initial stock value
+    if (Number($(this).val()) > Number($(this).attr("stock"))) {
+      $(this).val(1);
+      let stockCheck = $(this).attr("stock");
 
-    $.ajax({
-      url: "ajax/products.ajax.php",
-      method: "POST",
-      data: data,
-      cache: false,
-      contentType: false,
-      processData: false,
-      dataType: "json",
-      success: function (response) {
-        $(newProductDescription).attr("productId", response["id"]);
-        $(newProductQuantity).attr("stock", response["stock"]);
-        $(newProductPrice).val(response["sale_price"]);
-      },
-    });
+      Swal.fire({
+        title: "Your quantity is more than available stock",
+        text: `Only ${stockCheck} units left!`,
+        icon: "error",
+        confirmButtonText: "Close",
+      });
+    }
   });
 
   // end
