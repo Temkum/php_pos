@@ -26,8 +26,11 @@ session_start();
   <script src="views/js/sweetalert2.all.min.js"></script>
   <!-- icheck -->
   <link rel="stylesheet" href="views/plugins/icheck/flat/_all.css">
+  <!-- numbox -->
+  <link rel="stylesheet" href="views/plugins/numbox/jquery.numbox-1.3.0.css">
   <!-- custom -->
   <link rel="stylesheet" href="views/dist/css/custom.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini login-page">
@@ -82,6 +85,8 @@ session_start();
   <!-- InputMask -->
   <script src="views/plugins/moment/moment.min.js"></script>
   <script src="views/plugins/inputmask/jquery.inputmask.min.js"></script>
+  <!-- numbox -->
+  <script src="views/plugins/numbox/jquery.numbox-1.3.0.min.js"></script>
 
   <!-- custom js -->
   <script type="text/javascript" src="views/js/user.js"></script>

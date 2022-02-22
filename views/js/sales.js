@@ -47,12 +47,12 @@ $(function () {
             icon: "error",
             confirmButtonText: "Close",
           });
-          /* $("div[productId='" + productId + '"]').addClass(
-            "btn-primary add-product"
-          ); */
-          $(`button[productId='${productId}`).addClass(
+          $("div[productId='" + productId + '"]').addClass(
             "btn-primary add-product"
           );
+          /* $(`button[productId='${productId}`).addClass(
+            "btn-primary add-product"
+          ); */
 
           return;
         }
@@ -80,7 +80,7 @@ $(function () {
                                 <i class="fas fa-dollar-sign"></i>
                               </div>
                             </div>
-                            <input type="number" class="form-control new-prod-price" realPrice="" name="new_prod_price" min="1"  value="${price}" readonly required>
+                            <input type="number" class="form-control new-prod-price" realPrice="${price}" name="new_prod_price" min="1"  id="prodPrice" value="${price}" readonly required>
                           </div>
                           <br>
                         `;
@@ -91,6 +91,8 @@ $(function () {
         grandTotal();
         // tax
         saleTax();
+
+        // $(".new-prod-price").NumBox();
       },
     });
   });
@@ -138,7 +140,7 @@ $(function () {
     );
 
     if ($(".col-12.prod-sale-row").children().length == 0) {
-      $("#newSaleTax").val(0);
+      $("#newSaleTax").val("");
       $("#newTotalSale").val(0);
       $("#newTotalSale").attr("total", 0);
     } else {
@@ -219,6 +221,9 @@ $(function () {
 
         // Add tax
         saleTax();
+
+        // set number format
+        $("prodPrice").NumBox();
       },
     });
   });
@@ -332,7 +337,7 @@ $(function () {
     let totalPrice = $("#newTotalSale").attr("total");
 
     let priceTax = Number((totalPrice * tax) / 100);
-    const totalWithTax = Number(priceTax + Number(totalPrice));
+    let totalWithTax = Number(priceTax + Number(totalPrice));
 
     $("#newTotalSale").val(totalWithTax);
     $("#newTaxPrice").val(priceTax);
@@ -343,5 +348,8 @@ $(function () {
   $("#newSaleTax").change(function () {
     saleTax();
   });
+
+  // numbox format
+  $(".new-prod-price").NumBox();
   // end
 });

@@ -146,5 +146,6 @@ $('#example').dataTable({
 - calculate prices of added product
 
 - add tax feature on sale
+- add jquery number plugin
 
 > adding sales part 3 - ended 5:30min
