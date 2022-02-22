@@ -1,18 +1,22 @@
 <style>
-  /* .box-success {
+/* .box-success {
   color: green;
 } */
-  .w-30 {
-    width: 30%;
-  }
+.w-30 {
+  width: 30%;
+}
 
-  .w-50 {
-    width: 50%;
-  }
+.w-50 {
+  width: 50%;
+}
 
-  .w-70 {
-    width: 70%;
-  }
+.w-70 {
+  width: 70%;
+}
+
+.bold {
+  font-weight: bold;
+}
 </style>
 
 <div class="content-wrapper">
@@ -55,8 +59,7 @@
                           </div>
                         </div>
                         <input type="text" class="form-control" name="sale_vendor" id="saleVendor" placeholder="Vendor"
-                          value="<?= $_SESSION['name']?>"
-                          readonly>
+                          value="<?= $_SESSION['name']?>" readonly>
                         <input type="hidden" name="vendor_id" id="vendorId">
                       </div>
                     </div>
@@ -128,28 +131,31 @@
                       <div class="row">
                         <div class="input-group mb-2 col-md-6">
                           <div class="input-group-prepend">
-                            <div class="input-group-text">
+                            <div class="input-group-text bold">
                               Taxes
                             </div>
                           </div>
-                          <input type="number" class="form-control" placeholder="0.00" min="1" required>
+                          <input type="number" class="form-control" placeholder="0.00" min="1" id="newSaleTax"
+                            name="new_tax_price" required>
+
+                          <input type="hidden" name="new_tax_price" id="newTaxPrice" required>
+                          <input type="hidden" name="new_net_price" id="newNetPrice" required>
                           <div class="input-group-append">
                             <div class="input-group-text">
                               <i class="fas fa-percent"></i>
                             </div>
                           </div>
                         </div>
+
                         <div class="input-group mb-2 col-md-6">
                           <div class="input-group-prepend">
-                            <div class="input-group-text">
-                              <i class="fas fa-dollar-sign"></i>
-                            </div>
+                            <div class="input-group-text bold">Total</div>
                           </div>
-                          <input type="number" class="form-control" placeholder="0.00" min="1" id="newTotalSale"
-                            name="new_total_sale" required readonly>
+                          <input type="number" class="form-control" placeholder="0.00" min="1" name="new_total_sale"
+                            id="newTotalSale" total="" required readonly>
                           <div class="input-group-append">
                             <div class="input-group-text">
-                              Total
+                              <i class="fas fa-dollar-sign"></i>
                             </div>
                           </div>
                         </div>

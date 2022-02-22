@@ -145,4 +145,6 @@ $('#example').dataTable({
 - modify qty of product
 - calculate prices of added product
 
+- add tax feature on sale
+
 > adding sales part 3 - ended 5:30min

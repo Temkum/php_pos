@@ -89,6 +89,8 @@ $(function () {
 
         // Add total prod prices
         grandTotal();
+        // tax
+        saleTax();
       },
     });
   });
@@ -136,10 +138,15 @@ $(function () {
     );
 
     if ($(".col-12.prod-sale-row").children().length == 0) {
+      $("#newSaleTax").val(0);
       $("#newTotalSale").val(0);
+      $("#newTotalSale").attr("total", 0);
     } else {
       // Add total prod prices
       grandTotal();
+
+      // Tax
+      saleTax();
     }
   });
 
@@ -209,6 +216,9 @@ $(function () {
         }
         // Add total prod prices
         grandTotal();
+
+        // Add tax
+        saleTax();
       },
     });
   });
@@ -293,6 +303,8 @@ $(function () {
 
     // Add total prod prices
     grandTotal();
+    // tax
+    saleTax();
   });
 
   /* Add total product prices */
@@ -311,6 +323,25 @@ $(function () {
     let totalPriceSum = priceArr.reduce(addPricesArr);
 
     $("#newTotalSale").val(totalPriceSum);
+    $("#newTotalSale").attr("total", totalPriceSum);
   }
+
+  /* TAX */
+  function saleTax() {
+    let tax = $("#newSaleTax").val();
+    let totalPrice = $("#newTotalSale").attr("total");
+
+    let priceTax = Number((totalPrice * tax) / 100);
+    const totalWithTax = Number(priceTax + Number(totalPrice));
+
+    $("#newTotalSale").val(totalWithTax);
+    $("#newTaxPrice").val(priceTax);
+    $("#newNetPrice").val(totalPrice);
+  }
+
+  /* Change total on tax change */
+  $("#newSaleTax").change(function () {
+    saleTax();
+  });
   // end
 });
