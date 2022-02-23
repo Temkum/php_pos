@@ -153,6 +153,8 @@
                           </div>
                           <input type="number" class="form-control" placeholder="0.00" min="1" name="new_total_sale"
                             id="newTotalSale" total="" required readonly>
+
+                          <input type="hidden" name="sale_total" id="saleTotal" required>
                           <div class="input-group-append">
                             <div class="input-group-text">
                               <i class="fas fa-dollar-sign"></i>
@@ -162,21 +164,21 @@
                       </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 payment">
                       <div class="form-group row text-center">
                         <label class="sr-only" for="inlineFormInputGroup">Payment method</label>
-                        <div class="col-xs-12 mb-2">
+                        <div class="col-xs-12 mb-2 mr-2">
                           <div class="input-group">
                             <select class="form-control" name="new_payment_method" id="newPaymentMethod" required>
-                              <option value="">Select payment method</option>
-                              <option value="cash">Cash</option>
+                              <option>Select payment method</option>
+                              <option value="Cash">Cash</option>
                               <option value="CC">Credit Card</option>
                               <option value="DC">Debit Card</option>
                             </select>
                           </div>
                         </div>
 
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 transaction-code">
                           <div class="input-group mb-2 col-auto">
                             <div class="input-group-prepend">
                               <div class="input-group-text">
@@ -187,6 +189,24 @@
                               name="transaction_code" id="transactionCode">
                           </div>
                         </div>
+                      </div>
+
+                      <!-- payment boxes -->
+                      <div class="payment-box col-xs-12 mb-2">
+                        <!-- <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                            </div>
+                            <input type="number" class="form-control new-cash-value" placeholder="Transaction Amount"
+                              name="new_cash_value" id="newCashValue" required>
+                          </div>
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                            </div>
+                            <input type="text" class="form-control new-cash-change" placeholder="Change"
+                              name="new_cash_change" id="newCashChange" readonly required>
+                          </div> -->
                       </div>
                     </div>
 

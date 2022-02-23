@@ -148,4 +148,7 @@ $('#example').dataTable({
 - add tax feature on sale
 - add jquery number plugin
 
+- Add payment methods
+- add cash change
+
 > adding sales part 3 - ended 5:30min

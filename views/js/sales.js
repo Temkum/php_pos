@@ -351,5 +351,61 @@ $(function () {
 
   // numbox format
   $(".new-prod-price").NumBox();
+
+  /* Payment method */
+  $("#newPaymentMethod").change(function () {
+    let method = $(this).val();
+
+    if (method == "Cash") {
+      $(this).parent().removeClass("payment");
+      $(this).parent().parent().addClass("col-xs-4");
+      $(this).parent().addClass("payment-box")
+        .html(`<div class="input-group mb-2 col-md-6">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                </div>
+                <input type="number" class="form-control new-cash-value" placeholder="Transaction Amount"
+                  name="new_cash_value" id="newCashValue" required>
+                </div>
+                <div class="input-group mb-2 col-md-6" id="getCashChange">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                  </div>
+                  <input type="text" class="form-control new-cash-change" placeholder="Change" name="new_cash_change" id="newCashChange" readonly required>
+                </div>
+                `);
+    } else {
+      $(this).parent().removeClass("transaction-code");
+      $(this).parent().parent().addClass("col-xs-6");
+      $(this).parent().parent().parent().addClass("payment-box")
+        .html(`<div class="col-xs-12">
+                  <div class="input-group mb-2 col-auto">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                      </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Transaction code" required
+                      name="transaction_code" id="transactionCode">
+                  </div>
+                </div>`);
+    }
+  });
+
+  /* Cash change */
+  $(".sales-form").on("change", "input.new-cash-change", function () {
+    let cash = $(this).val();
+    let change = Number(cash) - Number($("#saleTotal").val());
+    let newCashChange = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .children("transaction-code")
+      .children()
+      .children(".new-cash-change");
+
+    newCashChange.val(change);
+  });
   // end
 });
