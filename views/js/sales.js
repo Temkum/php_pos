@@ -368,6 +368,8 @@ $(function () {
   // numbox format
   // $(".new-prod-price").NumBox();
 
+  paymentMethods();
+
   /* Payment method */
   $("#newPaymentMethod").change(function () {
     let method = $(this).val();
@@ -389,6 +391,12 @@ $(function () {
                   <input type="text" class="form-control new-cash-change" placeholder="Change" name="new_cash_change" id="newCashChange" readonly required>
                 </div>
                 `);
+
+      // numbox format
+      /*$(".new_cash_value").NumBox ();
+      $(".new-cash-change").NumBox(); */
+
+      paymentMethods();
     } else {
       $(this).parent().parent().removeClass("transaction-code");
       $(this).parent().parent().addClass("col-xs-4");
@@ -443,4 +451,23 @@ $(function () {
 
     $("#productsList").val(JSON.stringify(productsList));
   }
+
+  /* List payment methods */
+  function paymentMethods() {
+    let paymentMode = "";
+
+    if ($("#newPaymentMethod").val() == "Cash") {
+      $("#listPaymentMethod").val("Cash");
+    } else {
+      $("#listPaymentMethod").val(
+        $("#newPaymentMethod").val() + "-" + $("#listPaymentMethod").val()
+      );
+    }
+  }
+
+  /* List payment methods */
+  $(".sales-form").on("change", "input#transactionCode", function () {
+    // List method in the entry
+    listMethods();
+  });
 }); // end

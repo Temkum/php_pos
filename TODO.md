@@ -152,5 +152,18 @@ $('#example').dataTable({
 - add cash change
 
 - Group products in json for save in single entry
+- organize sale input to save in database
+
+```
+$code = $_POST['sale_vendor']
+$client_id = $_POST['select_client']
+$vendor_id = $_POST['vendor_id']
+$product = $_POST['products_list']
+$tax = $_POST['new_tax_price']
+$net_price = $_POST['new_net_price']
+$total = $_POST['new_total_sale']
+$payment_method = $_POST['new_payment_method']
+
+```
 
 > adding sales part 3 - ended 5:30min
