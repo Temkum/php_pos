@@ -123,6 +123,8 @@
 
                       </div>
 
+                      <input type="hidden" name="products_list" id="productsList">
+
                       <button type="button" class="btn btn-outline-secondary btn-md hidden-lg mb-2 addProduct-btn">Add
                         products</button> <br>
                     </div>
@@ -189,25 +191,11 @@
                               name="transaction_code" id="transactionCode">
                           </div>
                         </div>
+
+                        <!-- payment boxes -->
+                        <div class="payment-box col-xs-12 mb-2"></div>
                       </div>
 
-                      <!-- payment boxes -->
-                      <div class="payment-box col-xs-12 mb-2">
-                        <!-- <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
-                            </div>
-                            <input type="number" class="form-control new-cash-value" placeholder="Transaction Amount"
-                              name="new_cash_value" id="newCashValue" required>
-                          </div>
-                          <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                              <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
-                            </div>
-                            <input type="text" class="form-control new-cash-change" placeholder="Change"
-                              name="new_cash_change" id="newCashChange" readonly required>
-                          </div> -->
-                      </div>
                     </div>
 
                     <div class="col-12 mt-3">

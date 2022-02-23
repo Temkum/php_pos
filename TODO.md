@@ -151,4 +151,6 @@ $('#example').dataTable({
 - Add payment methods
 - add cash change
 
+- Group products in json for save in single entry
+
 > adding sales part 3 - ended 5:30min

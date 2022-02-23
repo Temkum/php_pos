@@ -71,7 +71,7 @@ $(function () {
                           </div>
 
                           <div class="input-group mb-2 col-md-2 col-sm-3">
-                            <input type="number" class="form-control new-prod-qty" name="new_prod_qty" min="1" value="1" stock="${stock}" required>
+                            <input type="number" class="form-control new-prod-qty" name="new_prod_qty" min="1" value="1" stock="${stock}" newStock="${stock}" required>
                           </div>
 
                           <div class="input-group mb-2 col-md-4 col-xs-8 enter-price">
@@ -91,6 +91,9 @@ $(function () {
         grandTotal();
         // tax
         saleTax();
+
+        // group prods in json
+        listProduct();
 
         // $(".new-prod-price").NumBox();
       },
@@ -149,6 +152,8 @@ $(function () {
 
       // Tax
       saleTax();
+
+      listProduct();
     }
   });
 
@@ -185,7 +190,7 @@ $(function () {
                           </div>
 
                           <div class="input-group mb-2 col-md-2 col-sm-3 enter-qty">
-                            <input type="number" class="form-control new-prod-qty" min="1"  value="1" name="new_prod_stock" stock newStock required>
+                            <input type="number" class="form-control new-prod-qty" min="1"  value="1" name="new_prod_stock" stock="${stock}" newStock="${stock}" required>
                           </div>
 
                           <div class="input-group mb-2 col-md-4 col-xs-8 enter-price">
@@ -222,8 +227,10 @@ $(function () {
         // Add tax
         saleTax();
 
+        listProduct();
+
         // set number format
-        $("prodPrice").NumBox();
+        // $("prodPrice").NumBox();
       },
     });
   });
@@ -269,7 +276,7 @@ $(function () {
       dataType: "json",
       success: function (response) {
         $(newProductDescription).attr("productId", response["id"]);
-        $(newProductQuantity).attr("stock", response["stock"]);
+        $(newProductQuantity).attr("stock", Number(response["stock"]) - 1);
         $(newProductPrice).val(response["sale_price"]);
         $(newProductPrice).attr("realPrice", response["sale_price"]);
       },
@@ -286,14 +293,21 @@ $(function () {
       .children(".new-prod-price");
 
     let totalPrice = $(this).val() * price.attr("realPrice");
+
     price.val(totalPrice);
+
+    let newStock = Number($(this).attr("stock")) - $(this).val();
+
+    $(this).attr("newStock", newStock);
 
     // if qty entered is greater than stock, set initial stock value
     if (Number($(this).val()) > Number($(this).attr("stock"))) {
       $(this).val(1);
+
       let stockCheck = $(this).attr("stock");
 
       let finalPrice = $(this).val() * price.attr("realPrice");
+
       price.val(finalPrice);
 
       grandTotal();
@@ -310,6 +324,8 @@ $(function () {
     grandTotal();
     // tax
     saleTax();
+
+    listProduct();
   });
 
   /* Add total product prices */
@@ -350,22 +366,21 @@ $(function () {
   });
 
   // numbox format
-  $(".new-prod-price").NumBox();
+  // $(".new-prod-price").NumBox();
 
   /* Payment method */
   $("#newPaymentMethod").change(function () {
     let method = $(this).val();
 
     if (method == "Cash") {
-      $(this).parent().removeClass("payment");
+      $(this).parent().parent().removeClass("payment");
       $(this).parent().parent().addClass("col-xs-4");
-      $(this).parent().addClass("payment-box")
+      $(this).parent().parent().parent().addClass("payment-box")
         .html(`<div class="input-group mb-2 col-md-6">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
-                </div>
-                <input type="number" class="form-control new-cash-value" placeholder="Transaction Amount"
-                  name="new_cash_value" id="newCashValue" required>
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                  </div>
+                  <input type="number" class="form-control new-cash-value" placeholder="Transaction Amount" name="new_cash_value" id="newCashValue" required>
                 </div>
                 <div class="input-group mb-2 col-md-6" id="getCashChange">
                   <div class="input-group-prepend">
@@ -375,8 +390,8 @@ $(function () {
                 </div>
                 `);
     } else {
-      $(this).parent().removeClass("transaction-code");
-      $(this).parent().parent().addClass("col-xs-6");
+      $(this).parent().parent().removeClass("transaction-code");
+      $(this).parent().parent().addClass("col-xs-4");
       $(this).parent().parent().parent().addClass("payment-box")
         .html(`<div class="col-xs-12">
                   <div class="input-group mb-2 col-auto">
@@ -393,19 +408,39 @@ $(function () {
   });
 
   /* Cash change */
-  $(".sales-form").on("change", "input.new-cash-change", function () {
+  $(".sales-form").on("change", "input.new-cash-value", function () {
     let cash = $(this).val();
     let change = Number(cash) - Number($("#saleTotal").val());
     let newCashChange = $(this)
       .parent()
       .parent()
       .parent()
-      .parent()
-      .children("transaction-code")
+      .children("#getCashChange")
       .children()
-      .children(".new-cash-change");
+      .children("#newCashChange");
 
     newCashChange.val(change);
   });
-  // end
-});
+
+  /* List products */
+  function listProduct() {
+    let productsList = [];
+    let description = $(".new-prod-desc");
+    let quantity = $(".new-prod-qty");
+
+    let price = $(".new-prod-price");
+
+    for (let i = 0; i < description.length; i++) {
+      productsList.push({
+        id: $(description[i]).attr("productId"),
+        description: $(description[i]).val(),
+        quantity: $(quantity[i]).val(),
+        stock: $(quantity[i]).attr("newStock"),
+        price: $(price[i]).attr("realPrice"),
+        totalPrice: $(price[i]).val(),
+      });
+    }
+
+    $("#productsList").val(JSON.stringify(productsList));
+  }
+}); // end
