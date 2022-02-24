@@ -145,6 +145,7 @@ $(function () {
     if ($(".col-12.prod-sale-row").children().length == 0) {
       $("#newSaleTax").val("");
       $("#newTotalSale").val(0);
+      $("#totalSale").val(0);
       $("#newTotalSale").attr("total", 0);
     } else {
       // Add total prod prices
@@ -345,6 +346,7 @@ $(function () {
 
     $("#newTotalSale").val(totalPriceSum);
     $("#newTotalSale").attr("total", totalPriceSum);
+    $("#totalSale").val("total", totalPriceSum);
   }
 
   /* TAX */
@@ -356,6 +358,7 @@ $(function () {
     let totalWithTax = Number(priceTax + Number(totalPrice));
 
     $("#newTotalSale").val(totalWithTax);
+    $("#totalSale").val(totalWithTax);
     $("#newTaxPrice").val(priceTax);
     $("#newNetPrice").val(totalPrice);
   }

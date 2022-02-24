@@ -161,9 +161,11 @@ $vendor_id = $_POST['vendor_id']
 $product = $_POST['products_list']
 $tax = $_POST['new_tax_price']
 $net_price = $_POST['new_net_price']
-$total = $_POST['new_total_sale']
+$total = $_POST['total_sale']
 $payment_method = $_POST['new_payment_method']
 
 ```
+
+- update products and clients table on sale save
 
 > adding sales part 3 - ended 5:30min

@@ -58,7 +58,7 @@
                             <i class="fa fa-user"></i>
                           </div>
                         </div>
-                        <input type="text" class="form-control" name="vendor_id" id="saleVendor" placeholder="Vendor"
+                        <input type="text" class="form-control" name="sale_vendor" id="saleVendor" placeholder="Vendor"
                           value="<?= $_SESSION['name']?>" readonly>
                         <input type="hidden" name="vendor_id" value="<?= $_SESSION['id']?>">
                       </div>
@@ -156,7 +156,7 @@
                           <input type="number" class="form-control" placeholder="0.00" min="1" name="new_total_sale"
                             id="newTotalSale" total="" required readonly>
 
-                          <input type="hidden" name="new_net_price" id="saleTotal" required>
+                          <input type="hidden" name="sale_total" id="saleTotal" required>
                           <div class="input-group-append">
                             <div class="input-group-text">
                               <i class="fas fa-dollar-sign"></i>
@@ -208,6 +208,10 @@
 
                   </div><!-- form row end -->
                 </form>
+                <?php 
+                    $create_sale = new SalesController();
+                    $create_sale->store();
+                ?>
 
               </div><!-- card body end -->
             </div>
