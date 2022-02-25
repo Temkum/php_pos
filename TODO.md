@@ -167,5 +167,7 @@ $payment_method = $_POST['new_payment_method']
 ```
 
 - update products and clients table on sale save
+- add sale to db
+- select & display sales
 
 > adding sales part 3 - ended 5:30min

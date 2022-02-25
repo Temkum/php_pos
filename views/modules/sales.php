@@ -58,31 +58,39 @@
                 </thead>
                 <tbody>
                   <?php
-                        // $item = null;
-                        // $value = null;
-                        // $clients = ClientsController::display($item, $value);
+                        $item = null;
+                        $value = null;
+                        $sales = SalesController::display($item, $value);
 
-                        // foreach ($clients as $key => $client) {
-                        //     echo '<tr class="odd">
-                        //   <td class="dtr-control sorting_1" tabindex="0">'.($key + 1).'</td>
-                        //   <td>'.$client['name'].'</td>
-                        //   <td>'.$client['document_id'].'</td>
-                        //   <td>'.$client['email'].'</td>
-                        //   <td>'.$client['phone'].'</td>
-                        //   <td>'.$client['address'].'</td>
-                        //   <td>'.$client['purchases'].'</td>
-                        //   <td>'.$client['last_login'].'</td>
-                        //   <td>'.$client['created_at'].'</td>
-                        //   <td class="action">
-                        //         <button class="btn btn-success btn-sm">
-                        //             <i class="fa fa-print text-white"></i>
-                        //         </button>
+                        foreach ($sales as $key => $sale) {
+                            echo '<tr class="odd">
+                          <td class="dtr-control sorting_1" tabindex="0">'.($key + 1).'</td>
+                          <td>'.$sale['code'].'</td>';
+
+                          $client_id = 'id';
+                          $client_value = $sale['client_id'];
+                          $client_data = ClientsController::display($client_id, $client_value);                          
+                         echo '<td>'.$client_data['name'].'</td>';
+
+                          $vendor_id = 'id';
+                          $vendor_value = $sale['vendor_id'];
+                          $vendor_data = UsersController::getUsers($vendor_id, $vendor_value);                           
+                         echo '<td>'.$vendor_data['name'].'</td>
+
+                          <td>'.$sale['payment_method'].'</td>
+                          <td>'. number_format($sale['net_price'], 2).'</td>
+                          <td>'. number_format($sale['total'], 2).'</td>
+                          <td>'.$sale['created_at'].'</td>
+                          <td class="action">
+                                <button class="btn btn-success btn-sm">
+                                    <i class="fa fa-print text-white"></i>
+                                </button>
                                 
-                        //         <button class="btn btn-danger btn-sm">
-                        //         <i class="fa fa-trash"></i></button>
-                        //     </td>
-                        //     </tr>';
-                        // }
+                                <button class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i></button>
+                            </td>
+                            </tr>';
+                        }
                     ?>
                 </tbody>
               </table>
